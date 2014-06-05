@@ -1,6 +1,8 @@
 <?php
     require_once ('content/classes/shiftClass.php');
+    require_once ('content/classes/fungsiClass.php');
 	$shift= new shiftTime();
+	$fungsi= new fungsi();
 	$dataHari = $shift->selectDays();
 	$dataShift = $shift->selectShift();
 	$max = $shift->maxHari();
@@ -70,20 +72,20 @@
 											if(isset($_GET['edit']) && $_GET['edit']==md5($data2['id'])){
 												echo "<form role='form' method='post' action='content/proses.php?act=editShift'><p class='inip'>"
 													."<input type='hidden' name='idshift' id='idshift' value='".md5($data2['id'])."'>"
-													."<input type='text' class='form-control-new timepicker' name='awal' id='awal' value='".$shift->showJam($data2['mulai'])."'>"
-													." - <input type='text' class='form-control-new timepicker' name='akhir' id='akhir' value='".$shift->showJam($data2['akhir'])."'>";
+													."<input type='text' class='form-control-new timepicker' name='awal' id='awal' value='".$fungsi->regenerateJam($data2['mulai'])."'>"
+													." - <input type='text' class='form-control-new timepicker' name='akhir' id='akhir' value='".$fungsi->regenerateJam($data2['akhir'])."'>";
 												echo "<input type='submit' class='btn btn-xs btn-success pull-right' value='&nbsp;Save&nbsp;'></p></form>";
 												$j++;
 											}
 											else if(isset($_GET['c']) && $_GET['c']==md5($data2['id'])){
 												echo "<form class='red' role='form' method='post' action='content/proses.php?act=deleteShift'>"
 													."<input type='hidden' name='idshift' id='idshift' value='".md5($data2['id'])."'>"
-													."Hapus ".$shift->showJam($data2['mulai'])." - ".$shift->showJam($data2['akhir'])."?";
+													."Hapus ".$fungsi->regenerateJam($data2['mulai'])." - ".$fungsi->regenerateJam($data2['akhir'])."?";
 												echo "<a href='?p=shift' class='pull-right'><button type='button' class='btn btn-xs pull-right' >Tidak</button></a><input type='submit' class='btn btn-xs btn-warning pull-right' value='&nbsp;Ya&nbsp;'></form>";
 												$j++;
 											}
 											else{
-												echo "<p class='inip'>".$shift->showJam($data2['mulai'])." - ".$shift->showJam($data2['akhir'])
+												echo "<p class='inip'>".$fungsi->regenerateJam($data2['mulai'])." - ".$fungsi->regenerateJam($data2['akhir'])
 													."<a href='?p=shift&c=".md5($data2['id'])."' data-toggle='modal'><button class='btn btn-xs pull-right'><i class='fa fa-times'></i></button></a>"
 													."<a href='?p=shift&edit=".md5($data2['id'])."'><button class='btn btn-xs btn-success pull-right'><i class='fa fa-pencil'></i> </button></a></p>";
 												$j++;

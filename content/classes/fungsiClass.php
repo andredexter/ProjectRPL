@@ -8,10 +8,10 @@
 		public function generateJam($jam) {
 			return $jam.":00.000000";
 		}
+		
 		public function regenerateJam($jam) {
 			$time=explode(":",$jam);
-			$time = $time[0].":".$time[1];
-			return $time;
+			return $time[0].":".$time[1];
 		}
 		
 		function formatindo($angka){

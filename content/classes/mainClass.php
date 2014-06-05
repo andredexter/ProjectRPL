@@ -2,16 +2,8 @@
     class webApp{
         public function createWebApp(){
             if(!isset($_SESSION['usernya'])){
-                if(isset($_GET['p']) && $_GET['p']=='login'){
-                    include ('content/view/login.php');
-                }
-                else if (isset ($_SESSION['try'])) {
-                    include ('content/view/main/'.$_SESSION['try'].'.php');           
-                }
-                else{
-                    include ('content/view/login.php');
-					header('../');
-                }                
+                include ('content/view/login.php');
+				header('../');               
             }
             else{
                 include ('content/view/layout.php');
@@ -69,30 +61,23 @@
             if(mysqli_num_rows($query)==1){
                 while ($row=  mysqli_fetch_array($query)){
 					$_SESSION['notif'] = "welcome";
-					if($row['jenis'] == 'pemilik'){
-						$informasi = new settingApps();
-						
-						$_SESSION['usernya'] = $informasi->loadSetting('pemilik');
+					$_SESSION['usernya'] = $row[0];
+					if($row['jenis'] == 'pemilik'){						
 						$_SESSION['prive'] = 0;
-						header('Location: ../');
 					}
 					else if($row['jenis'] == 'admin'){
-						$_SESSION['usernya'] = $row[0];
 						$_SESSION['prive'] = 1;
-						header('Location: ../');
 					}
-					
                     else{
                         $_SESSION['login']="auth";
-                        header('Location: ../');
-                        //redirect ke error 403 you are forbidden to access this page
                     }                    
+					header('Location: ../');
                 }
                 $this->dbClose();
             }
             else{
                $_SESSION['login']='fail';
-               header('Location: ../?p=login');
+               header('Location: ../');
             }            
         }
         
@@ -110,18 +95,13 @@
             
             $sql="SELECT value FROM `setting` where nama_setting = '$load'";
             $query=mysqli_query($this->conn, $sql);
-            if(mysqli_num_rows($query)==1){
-                while ($row=  mysqli_fetch_array($query)){
-						$hasil =  $row['value'];
-                }                    
-                $this->dbClose();
-            }
-            else{
-			   $hasil = 'Error';
-               
-            }           
-		return $hasil;
+            $row=  mysqli_fetch_array($query);
+			$hasil =  $row[0];
+            $this->dbClose();
+            
+			return $hasil;
         }
+		
         public function saveInfo($nama, $value){
 			$this->dbOpen();
 			$nama= mysqli_real_escape_string($this->conn, $nama);

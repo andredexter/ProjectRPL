@@ -65,7 +65,7 @@
 			
 			$row =  mysqli_fetch_array($query);			
 			
-			return $row[0];
+			return $row['nama_siswa'];
 		}
 		
 		public function getMonthName($bln){
@@ -187,13 +187,10 @@
 			$sql = "SELECT COALESCE(SUM(uang_masuk), 0) AS jumlah_masuk FROM siswa WHERE CAST(tanggal_masuk AS UNSIGNED) < '$bln%'";
 			
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			$num_results = mysqli_num_rows($query); 
-			
 			$row = mysqli_fetch_array($query);
-			$dataMasuk = $row[0];
 			
 			$this->dbClose();
-			return $dataMasuk;
+			return $row[0];
 		}
 		private function getBayarBefore($bln){
 			$this->dbOpen();
@@ -202,13 +199,10 @@
 			$sql = "SELECT COALESCE(SUM(jumlah), 0) AS jumlah_bayar FROM pembayaran WHERE CAST(bulan AS UNSIGNED) < '$bln%'";
 
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			$num_results = mysqli_num_rows($query); 
-			
-			$row = mysqli_fetch_array($query);
-			$dataBayar = $row[0];
+			$row = mysqli_fetch_array($query);			
 			
 			$this->dbClose();
-			return $dataBayar;
+			return $row[0];
 		}
 		private function getGajiBefore($bln){
 			$this->dbOpen();
@@ -217,13 +211,10 @@
 			$sql = "SELECT SUM(a.jumlah_pengajar) as jumlah FROM pembagian a LEFT JOIN absen b ON a.id_absen = b.id_absen WHERE CAST(b.bulan AS UNSIGNED) < '$bln%'";
 			
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			$num_results = mysqli_num_rows($query); 
-			
 			$row = mysqli_fetch_array($query);
-			$dataGaji = $row[0];
-				
+			
 			$this->dbClose();
-			return $dataGaji;
+			return $row[0];
 		}
 		
 		public function getSaldoBefore($bln){

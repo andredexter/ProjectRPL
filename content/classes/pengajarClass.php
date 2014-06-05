@@ -41,8 +41,7 @@
 			$sql = "SELECT COUNT(*) AS cekPengajar FROM pengajar WHERE nama_pengajar = '$nama' AND tempat_lahir = '$tempat' AND tanggal_lahir = '$tanggal'";
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
-			$rows = $row['cekPengajar'];
-			return $rows;
+			return $row[0];
 		}
 		
 		public function savePengajar($nama, $tempat, $tanggal, $pendidikan, $alamat, $telp) {
@@ -103,6 +102,7 @@
 		   $this->dbClose();
 		   header('Location: ../?p=pengajar&sub=lihat');
 		}
+		
 		public function deletePengajar($id, $nama) {
 			$this->dbOpen();
 			$id = mysqli_real_escape_string($this->conn, $id);
@@ -129,9 +129,8 @@
 			
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
-			$rows = $row[0];
 			$this->dbClose();
-			return $rows;
+			return $row[0];
 		}
 	}
 ?>

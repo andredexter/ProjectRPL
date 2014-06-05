@@ -160,9 +160,9 @@
     </div>
   </body>
    <script>
-	// window.load = print_d();
-	// function print_d(){
-	// window.print();
-	// }
+	window.load = print_d();
+	function print_d(){
+	window.print();
+	}
  </script>
 </html>

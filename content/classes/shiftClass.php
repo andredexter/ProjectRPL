@@ -1,4 +1,6 @@
 <?php
+	require_once ('fungsiClass.php');
+
 	class shiftTime extends dbController{
 		public function selectShift() {
 			$this->dbOpen();
@@ -23,8 +25,7 @@
 			$this->dbClose();
 			return $dataShift;        		
 		}
-		
-		
+				
 		public function cekShift($id, $awal, $akhir){
 			$this->dbOpen();
 			$sql = "SELECT COUNT(*) AS cekShift FROM shift WHERE id_hari = '$id' AND jam_mulai = '$awal' AND jam_akhir = '$akhir'";
@@ -34,27 +35,19 @@
 			return $rows;
 		}
 		
-		public function generateJam($jam) {
-			return $jam.":00.000000";
-		}
-		public function regenerateJam($jam) {
-			$time=explode(":",$jam);
-			$time = $time[0].":".$time[1];
-			return $time;
-		}
-		
 		public function saveShift($id, $awal, $akhir) {
 			$this->dbOpen();
+			$fungsi = new fungsi();
 			$id = mysqli_real_escape_string($this->conn, $id);
 			$awal= mysqli_real_escape_string($this->conn, $awal);
 			$akhir= mysqli_real_escape_string($this->conn, $akhir);
 			
-			$baris = $this->cekShift($id, $this->generateJam($awal), $this->generateJam($akhir));
+			$baris = $this->cekShift($id, $fungsi->generateJam($awal), $fungsi->generateJam($akhir));
 			
 			if($baris!=0){
 				$_SESSION['notif']="wrongShift";
-				$_SESSION['jam_awal']=$this->regenerateJam($awal);
-				$_SESSION['jam_akhir']=$this->regenerateJam($akhir);
+				$_SESSION['jam_awal']=$fungsi->regenerateJam($awal);
+				$_SESSION['jam_akhir']=$fungsi->regenerateJam($akhir);
 				header('Location: ../?p=shift&sub=add&id='.$id);
 			}
 			else{
@@ -68,6 +61,7 @@
 				header('Location: ../?p=shift');
 			}
 		}
+		
 		public function editShift($id, $mulai, $akhir) {
 			$this->dbOpen();
 			$id = mysqli_real_escape_string($this->conn, $id);
@@ -85,6 +79,7 @@
 		   $this->dbClose();
 		   header('Location: ../?p=shift');
 		}
+		
 		public function deleteShift($id) {
 			$this->dbOpen();
 			$id = mysqli_real_escape_string($this->conn, $id);
@@ -101,12 +96,7 @@
 		   $this->dbClose();
 		   header('Location: ../?p=shift');
 		}
-		function showJam($time){
-			$time=explode(":",$time);
-			$time = $time[0].":".$time[1];
-			return $time;
-		}
-		
+
 		function selectDays(){
 			$this->dbOpen();
 			$sql = "SELECT * FROM hari ORDER BY id_hari";

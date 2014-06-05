@@ -48,8 +48,7 @@
 			$sql = "SELECT COUNT(*) AS cekSiswa FROM siswa WHERE nama_siswa = '$nama' AND tempat_lahir = '$tempat' AND tanggal_lahir = '$tanggal'";
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
-			$rows = $row['cekSiswa'];
-			return $rows;
+			return $row[0];
 		}
 		
 		public function saveSiswa($nama, $tempat, $tanggal, $alamat, $telp, $daftar, $biaya, $instrument) {
@@ -92,31 +91,32 @@
 			}
 		}
 		
-			public function editSiswa($id, $nama, $tempat, $tanggal, $alamat, $telepon, $instrument, $tingkat) {
-				$this->dbOpen();
-				$id = mysqli_real_escape_string($this->conn, $id);
-				$nama = mysqli_real_escape_string($this->conn, $nama);
-				$tempat = mysqli_real_escape_string($this->conn, $tempat);
-				$tanggal = mysqli_real_escape_string($this->conn, $tanggal);
-				$alamat = mysqli_real_escape_string($this->conn, $alamat);
-				$telepon = mysqli_real_escape_string($this->conn, $telepon);
-				$instrument= mysqli_real_escape_string($this->conn, $instrument);
-				$tingakt = mysqli_real_escape_string($this->conn, $tingakt);
-				
-				$sql = "UPDATE siswa SET nama_siswa='$nama', tempat_lahir='$tempat', tanggal_lahir='$tanggal', alamat='$alamat', telepon='$telepon', id_instrument='$instrument', id_tingkat='$tingkat' WHERE md5(id_siswa)='$id'";
+		public function editSiswa($id, $nama, $tempat, $tanggal, $alamat, $telepon, $instrument, $tingkat) {
+			$this->dbOpen();
+			$id = mysqli_real_escape_string($this->conn, $id);
+			$nama = mysqli_real_escape_string($this->conn, $nama);
+			$tempat = mysqli_real_escape_string($this->conn, $tempat);
+			$tanggal = mysqli_real_escape_string($this->conn, $tanggal);
+			$alamat = mysqli_real_escape_string($this->conn, $alamat);
+			$telepon = mysqli_real_escape_string($this->conn, $telepon);
+			$instrument= mysqli_real_escape_string($this->conn, $instrument);
+			$tingakt = mysqli_real_escape_string($this->conn, $tingakt);
+			
+			$sql = "UPDATE siswa SET nama_siswa='$nama', tempat_lahir='$tempat', tanggal_lahir='$tanggal', alamat='$alamat', telepon='$telepon', id_instrument='$instrument', id_tingkat='$tingkat' WHERE md5(id_siswa)='$id'";
 
-				$query = mysqli_query($this->conn, $sql);
-				if ($query==true){
-					$_SESSION['notif']="editSukses";
-					$_SESSION['namanya']=$nama;
-				}
-				else {
-					$_SESSION['notif']="editGagal";
-					$_SESSION['namanya']=$nama;
-			   }
-			   $this->dbClose();
-			   header('Location: ../?p=siswa&sub=lihat');
+			$query = mysqli_query($this->conn, $sql);
+			if ($query==true){
+				$_SESSION['notif']="editSukses";
+				$_SESSION['namanya']=$nama;
 			}
+			else {
+				$_SESSION['notif']="editGagal";
+				$_SESSION['namanya']=$nama;
+		   }
+		   $this->dbClose();
+		   header('Location: ../?p=siswa&sub=lihat');
+		}
+		
 		public function deleteSiswa($id, $nama) {
 			$this->dbOpen();
 			$id = mysqli_real_escape_string($this->conn, $id);
@@ -134,6 +134,7 @@
 		   $this->dbClose();
 		   header('Location: ../?p=siswa&sub=lihat');
 		}
+		
 		public function pickSiswa($id){
 			$this->dbOpen();
 			$id = mysqli_real_escape_string($this->conn, $id);
@@ -165,6 +166,7 @@
 			$this->dbClose();
 			return $dataSiswa;    
 		}
+		
 		public function countSiswa(){
 			$this->dbOpen();
 			
@@ -181,7 +183,6 @@
 				
 			$this->dbClose();
 			return $datasiswa;
-			
 		}
 		
 		public function cekBayar($bulan, $id){

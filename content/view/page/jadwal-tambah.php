@@ -1,8 +1,16 @@
 <?php
+if(!isset($_GET['id'])){
+	echo "<script>document.location='?p=jadwal'</script>";
+}
+
 $tanggal = date('Y-m-d');
+
 require_once ('content/classes/jadwalClass.php');
 require_once ('content/classes/fungsiClass.php');
+
 $jadwal= new jadwal();
+$fungsi = new fungsi();
+
 $dataSiswa= $jadwal->getSiswa();  
 $dataPengajar= $jadwal->getPengajar();  
 $dataShift= $jadwal->getShift($_GET['id']);  
@@ -11,15 +19,8 @@ $dataShift= $jadwal->getShift($_GET['id']);
 <div class="page-content">
 	<!-- Heading -->
 	<div class="single-head">
-		<?php
-		if(!isset($_GET['id']))
-			echo "<script>document.location='?p=jadwal'</script>";
-		{
-		}
-		$datetime = new fungsi();
-		?>
 		<!-- Heading -->
-		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Jadwal Pelajaran Baru [ Hari : <?php echo $datetime->selectHari($_GET['id'])?> ]</h3>
+		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Jadwal Pelajaran Baru [ Hari : <?php echo $fungsi->selectHari($_GET['id'])?> ]</h3>
 		<div class="clearfix"></div>
 	</div>
 	
@@ -54,7 +55,6 @@ $dataShift= $jadwal->getShift($_GET['id']);
 												$i=1;
 												foreach ($dataSiswa as $data) {
 													echo"<option value='".$data['id_siswa']."'>".$data['nama_siswa']."</option>";
-													
 													$i++;
 												}
 											}
@@ -75,7 +75,6 @@ $dataShift= $jadwal->getShift($_GET['id']);
 												$i=1;
 												foreach ($dataPengajar as $data) {
 													echo"<option value='".$data['id_pengajar']."'>".$data['nama_pengajar']."</option>";
-													
 													$i++;
 												}
 											}
@@ -95,7 +94,7 @@ $dataShift= $jadwal->getShift($_GET['id']);
 											echo"<option value='0'>- Pilih jam belajar -</option>";
 											$i=1;
 											foreach ($dataShift as $data) {
-												echo"<option value='".$data['id_shift']."'>".$jadwal->showJam($data['jam_mulai'])." - ".$jadwal->showJam($data['jam_akhir'])."</option>";
+												echo"<option value='".$data['id_shift']."'>".$fungsi->regenerateJam($data['jam_mulai'])." - ".$fungsi->regenerateJam($data['jam_akhir'])."</option>";
 												
 												$i++;
 											}

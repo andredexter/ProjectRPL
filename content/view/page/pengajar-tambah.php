@@ -1,3 +1,7 @@
+<?php
+$tanggal = date('Y-m-d');
+?>
+
 <div class="page-content">
 
 	<!-- Heading -->
@@ -45,7 +49,7 @@
 					<input id="tempat" name="tempat" class="form-control" type="text" value="<?php if(isset($_SESSION['tempat'])){echo $_SESSION['tempat'];}else { echo '';}unset($_SESSION['tempat']);?>"/>
 				</div>
 				<div class="col-lg-5">
-					<input type="date" id="tanggal" name="tanggal" class="form-control" type="text" value="<?php if(isset($_SESSION['tanggal'])){echo $_SESSION['tanggal'];}else { echo '';}unset($_SESSION['tanggal']);?>"/>
+					<input type="date" id="tanggal" name="tanggal" class="form-control" type="text" value="<?php if(isset($_SESSION['tanggal'])){echo $_SESSION['tanggal'];}else { echo $tanggal;}unset($_SESSION['tanggal']);?>"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -70,7 +74,7 @@
 			<div class="form-group">
 				<div class="col-lg-offset-3 col-lg-9">
 					<input type="submit" class="btn btn-primary submit" value="Simpan"></input>&nbsp;
-					<a href="?p=pengajar&sub=lihat"><button type="button" class="btn btn-default">Batal</button></a>
+					<a href="?p=pengajar&sub=lihat"><button type="button" class="btn btn-default">Kembali</button></a>
 				</div>	
 			</div>
 		</form>

@@ -124,7 +124,6 @@
 			$sql = "SELECT nama_siswa FROM siswa WHERE id_siswa = $siswa";
 			
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			
 			$row =  mysqli_fetch_array($query);			
 			
 			return $row[0];

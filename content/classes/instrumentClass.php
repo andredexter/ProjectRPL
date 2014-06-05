@@ -112,7 +112,7 @@
 			$row=  mysqli_fetch_array($query);
 			$this->dbClose();
 			
-			return $row['biaya_instrument'];
+			return $row[0];
 		}
 	}
 ?>

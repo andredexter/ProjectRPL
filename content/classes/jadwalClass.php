@@ -30,24 +30,14 @@
 			$this->dbClose();
 			return $dataJadwal;        		
 		}
-		
-		
+				
 		public function cekJadwal($id, $awal, $akhir){
 			$this->dbOpen();
 			$sql = "SELECT COUNT(*) AS cekJadwal FROM jadwal WHERE id_hari = '$id' AND jam_mulai = '$awal' AND jam_akhir = '$akhir'";
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
-			$rows = $row['cekJadwal'];
-			return $rows;
-		}
-		
-		public function generateJam($jam) {
-			return $jam.":00.000000";
-		}
-		public function regenerateJam($jam) {
-			$time=explode(":",$jam);
-			$time = $time[0].":".$time[1];
-			return $time;
+
+			return $row['cekJadwal'];
 		}
 		
 		public function saveJadwal($siswa, $pengajar, $shift) {
@@ -80,11 +70,6 @@
 		   }
 		   $this->dbClose();
 		   header('Location: ../?p=jadwal');
-		}
-		function showJam($time){
-			$time=explode(":",$time);
-			$time = $time[0].":".$time[1];
-			return $time;
 		}
 		
 		function getShift($id){
@@ -176,28 +161,6 @@
 			unset($i);
 			$this->dbClose();
 			return $dataHari;        
-		}
-		
-		function maxHari(){
-			$this->dbOpen();
-			$sql = "SELECT count(id_hari) AS 'total' FROM shift	 GROUP BY (id_hari) ORDER BY (total) DESC LIMIT 1";
-			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			$num_results = mysqli_num_rows($query); 
-			
-			if ($num_results > 0){ 
-				$i=0;
-				while ($row = mysqli_fetch_array($query)){
-					$max = $row[0];
-					$i++;
-				}
-			}else{ 
-				$max = 7;
-			}
-			
-			unset($i);
-			$this->dbClose();
-			return $max;        		
-		}
-
+		}		
 	}
 ?>
