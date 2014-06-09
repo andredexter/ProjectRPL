@@ -126,7 +126,7 @@
 					<?php
 					if($dataSiswa === null){
 							echo"<tr>"
-								. "<td colspan='9'><div class='alert alert-danger text-center'>Data Kosong"
+								. "<td colspan='10'><div class='alert alert-danger text-center'>Data Kosong"
 								."</div></td>"
 								. "</tr>";
 						}

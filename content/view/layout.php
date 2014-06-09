@@ -135,6 +135,7 @@
 									<!-- Dropdown -->
 									<ul class="dropdown-menu" aria-labelledby="profile">
 									    <!--<li><a href="#">Lihat/Ubah Profil <span class="badge badge-info pull-right">6</span></a></li>-->
+										 <li><a href="?p=informasi&sub=user"><i class="fa fa-gear pull-right"></i> Change Password </a></li>
 										 <li><a href="content/proses.php?act=logout"><i class="fa fa-power-off pull-right"></i> Keluar </a></li>										
 									</ul>
 								</div>

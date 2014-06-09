@@ -95,7 +95,7 @@
 				$_SESSION['notif']="success";
 			}
 			$this->dbClose();
-			header('Location: ../?p=pembayaran');			
+			header('Location: ../?p=pembayaran');
 		}
 		
 		public function editPembayaran($id, $jumlah) {
@@ -127,17 +127,6 @@
 			$row =  mysqli_fetch_array($query);			
 			
 			return $row[0];
-		}
-		
-		public function getMonthName($bln){
-			$day = array("Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu");
-			$nama_bln=array(1=> "Januari", "Februari", "Maret", "April", "Mei", 
-                    "Juni", "Juli", "Agustus", "September", 
-                    "Oktober", "November", "Desember");
-					
-			$tgl = explode('-', $bln);
-			
-			return $nama_bln[intval($tgl[1])]." ".$tgl[0];
 		}
 	}
 ?>

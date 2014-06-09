@@ -1,5 +1,5 @@
 <?php
-	class fungsi extends dbController{
+	class fungsi{
 		public function getMonth($tgl){
 			$tgl = explode('-', $tgl);
 			return $tgl[0]."-".$tgl[1];
@@ -93,10 +93,6 @@
 		
 		public function delComma($nStr){
 			return str_replace('.','',$nStr);
-		}
-		
-		public function validasiText($str){
-		
 		}
 	}
 ?>

@@ -14,6 +14,7 @@ $dataInstrument = $instrument->getInstrument('*');
 		<div class="clearfix"></div>
 	</div>
 	<?php
+	
 	if(isset($_SESSION['notif'])){
 		if($_SESSION['notif'] == 'duplicateSiswa') {
 			echo "<div class='alert alert-danger alert-dismissable'>
@@ -45,13 +46,13 @@ $dataInstrument = $instrument->getInstrument('*');
 				<div class="form-group">
 						<label class="col-lg-2 control-label">Nama Siswa</label>
 						<div class="col-lg-3"	>
-							<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama lengkap">
+							<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama lengkap" required>
 						</div>	
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 control-label">Tempat/ Tanggal Lahir</label>
 						<div class="col-lg-2"	>
-							<input type="text" id="tempatlahir" name="tempatlahir" class="form-control" placeholder="Tempat Lahir">
+							<input type="text" id="tempatlahir" name="tempatlahir" class="form-control" placeholder="Tempat Lahir" required>
 						</div>
 						<div class="col-lg-2"	>
 							<input type="date" id="tanggallahir" name="tanggallahir" class="form-control" value="<?php echo $tanggal;?>">
@@ -60,13 +61,13 @@ $dataInstrument = $instrument->getInstrument('*');
 					<div class="form-group">
 						<label class="col-lg-2 control-label">Alamat Siswa</label>
 						<div class="col-lg-4"	>
-							<textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat lengkap"></textarea>
+							<textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat lengkap" required></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-2 control-label">Telepon Siswa</label>
 						<div class="col-lg-3"	>
-							<input type="text" id="telepon" name="telepon" class="form-control" placeholder="Nomor yang bisa dihubungi">
+							<input type="text" id="telepon" name="telepon" class="form-control" placeholder="Nomor yang bisa dihubungi" required>
 						</div>
 					</div>
 				
@@ -95,7 +96,7 @@ $dataInstrument = $instrument->getInstrument('*');
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Biaya Pendaftaran</label>
 					<div class="col-lg-3"	>
-						<input type="text" id="biaya" name="biaya" onkeyup="this.value = addCommas(coma(this.value))" class="form-control">
+						<input type="text" id="biaya" name="biaya" onkeyup="this.value = addCommas(coma(this.value))" class="form-control" required>
 					</div>
 					
 					<div class="col-lg-3"	>
@@ -107,6 +108,7 @@ $dataInstrument = $instrument->getInstrument('*');
 						</div>
 					
 				</div>
+				<input type="hidden" id="pendaftaran" name="pendaftaran" class="form-control" readonly>
 				
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Biaya Instrument</label>

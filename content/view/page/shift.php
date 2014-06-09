@@ -65,6 +65,10 @@
 								echo "<div class='col-md-3'>"
 									."<div class='judul'>".$data['nama']."</div>"
 									."<div class='rowbaru'>";
+									if($dataShift == null){
+										echo "";
+									}
+									else{
 									 $ii = 0;
 									 $j = 0;
 									 foreach($dataShift as $data2){
@@ -93,21 +97,20 @@
 										}
 										$i++;
 									 }
-									 
-									 
-								if ($j == 0){
-									echo "<p class='inip'>Shift Kosong</p>";
-									for($ii = $j+1; $ii< $max; $ii++){
+									 if ($j == 0){
+										echo "<p class='inip'>Shift Kosong</p>";
+										for($ii = $j+1; $ii< $max; $ii++){
 											echo "<p class='inip'></p>";
-									}									
-								}
-								else {
-									if($j < $max){
-										for($ii = $j; $ii< $max; $ii++){
-											echo "<p class='inip'></p>";
+										}									
+									 }
+									 else {
+										if($j < $max){
+											for($ii = $j; $ii< $max; $ii++){
+												echo "<p class='inip'></p>";
+											}
 										}
 									 }
-								}
+									}
 								echo "</div>"
 									."<p><a href='?p=shift&sub=add&id=".$data['id']."'><button type='button' class='btn btn-default'><i class='fa fa-plus'></i><span>Tambah</span></button></a></p></div>";
 								$i++;

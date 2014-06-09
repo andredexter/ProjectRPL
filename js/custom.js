@@ -77,7 +77,13 @@ function coma(nStr){
 	});
 	
 	function getTotal(){
-		var biayadaftar = parseInt(coma($('input#biaya').val()));
+		if($('input#biaya').val() == ""){
+			var biayadaftar = 0;
+		}
+		else{
+			var biayadaftar = parseInt(coma($('input#biaya').val()));
+		}
+		
 		
 		if($('input#biayainstrument').val() == ""){
 			var instrument = 0;
@@ -100,8 +106,10 @@ function coma(nStr){
 		discount = (discount/100)*biayadaftar;
 		
 		var total = biayadaftar - discount + instrument;
+		$('input#pendaftaran').val(addCommas(biayadaftar-discount));
 		$('input#total').val(addCommas(total));
 	}
+	
 	$('input#biaya').on('keyup', function() {
 		getTotal();
 	});

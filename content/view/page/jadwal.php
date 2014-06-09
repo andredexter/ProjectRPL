@@ -118,24 +118,6 @@
 					}
                     ?>                                                                       
 			</div>
-			<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<p>Hapus data ini ?</p>
-							<?php
-							 if(isset($_GET['c'])){
-								echo $_GET['c'];
-							 }
-							?>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Close</button>
-							<button type="button" class="btn btn-primary btn-sm">Save changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>	
 	

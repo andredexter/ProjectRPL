@@ -46,7 +46,7 @@ $tanggal = date('Y-m-d');
 			<div class="form-group">
 				<label for="name" class="control-label col-lg-3">Tempat/Tanggal Lahir</label>
 				<div class="col-lg-4">
-					<input id="tempat" name="tempat" class="form-control" type="text" value="<?php if(isset($_SESSION['tempat'])){echo $_SESSION['tempat'];}else { echo '';}unset($_SESSION['tempat']);?>"/>
+					<input id="tempat" name="tempat" class="form-control" type="text" value="<?php if(isset($_SESSION['tempat'])){echo $_SESSION['tempat'];}else { echo '';}unset($_SESSION['tempat']);?>" required/>
 				</div>
 				<div class="col-lg-5">
 					<input type="date" id="tanggal" name="tanggal" class="form-control" type="text" value="<?php if(isset($_SESSION['tanggal'])){echo $_SESSION['tanggal'];}else { echo $tanggal;}unset($_SESSION['tanggal']);?>"/>
@@ -55,7 +55,7 @@ $tanggal = date('Y-m-d');
 			<div class="form-group">
 				<label for="telp" class="control-label col-lg-3">Pendidikan</label>
 				<div class="col-lg-9">
-					<input id="pendidikan" name="pendidikan" class="form-control" type="text" value="<?php if(isset($_SESSION['pendidikan'])){echo $_SESSION['pendidikan'];}else { echo '';}unset($_SESSION['pendidikan']);?>"/>
+					<input id="pendidikan" name="pendidikan" class="form-control" type="text" value="<?php if(isset($_SESSION['pendidikan'])){echo $_SESSION['pendidikan'];}else { echo '';}unset($_SESSION['pendidikan']);?>" required/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -67,7 +67,7 @@ $tanggal = date('Y-m-d');
 			<div class="form-group">
 				<label for="alamat" class="control-label col-lg-3">Alamat</label>
 				<div class="col-lg-9">
-					<textarea id="alamat" name="alamat" class="form-control"><?php if(isset($_SESSION['alamat'])){echo $_SESSION['alamat'];}else { echo '';}unset($_SESSION['alamat']);?></textarea>
+					<textarea id="alamat" name="alamat" class="form-control" required><?php if(isset($_SESSION['alamat'])){echo $_SESSION['alamat'];}else { echo '';}unset($_SESSION['alamat']);?></textarea>
 				</div>
 			</div>
 			                

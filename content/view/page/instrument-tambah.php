@@ -36,14 +36,14 @@
 			<div class="form-group">
 				<label for="jenis" class="control-label col-lg-3">Jenis Instrument</label>
 				<div class="col-lg-9">
-					<input id="jenis" name="jenis" class="form-control" type="text" />
+					<input id="jenis" name="jenis" class="form-control" type="text" required />
 					<em>Contoh: Gitar</em>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="biaya" class="control-label col-lg-3">Biaya (Rp.)</label>
 				<div class="col-lg-9">
-					<input id="biaya" name="biaya" class="form-control" type="text" />
+					<input id="biaya" name="biaya" class="form-control" type="text" required/>
 				</div>
 			</div>
 			<div class="form-group">

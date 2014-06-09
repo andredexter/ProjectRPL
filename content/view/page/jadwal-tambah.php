@@ -35,6 +35,12 @@ $dataShift= $jadwal->getShift($_GET['id']);
 								  <strong>Kesalahan!</strong> Jam Belajar telah ada disimpan sebelumnya.
 								  </div>";
 						}
+						else if($_SESSION['notif'] == 'duplicatePengajar'){
+							echo "<div class='alert alert-danger alert-dismissable'>
+								  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>x</button>
+								  <strong>Kesalahan!</strong> Pengajar telah memiliki jam mengajar pada jam tersebut.
+								  </div>";
+						}
 						unset($_SESSION['notif']);
 					 }
 				?>
@@ -42,6 +48,7 @@ $dataShift= $jadwal->getShift($_GET['id']);
 					<div class="page-form">
 					<!-- Form Content -->
 						<form class="form-horizontal" role="form" action="content/proses.php?act=saveJadwal" method="post">
+							<input type="hidden" id="hari" name="hari" value="<?php echo $_GET['id']?>">
 							<div class="form-group">
 								<label for="name" class="control-label col-lg-2">Nama Siswa</label>
 								<div class="col-lg-5">

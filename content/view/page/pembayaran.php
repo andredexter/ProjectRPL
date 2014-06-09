@@ -16,7 +16,7 @@ $month = $fungsi->getMonth($tanggal);
 		<!-- Heading -->
 		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Pembayaran Uang Bulanan 
 			<?php if(isset($_POST['month'])&&isset($_POST['siswa'])){
-				echo $pembayaran->getName($_POST['siswa'])." pada bulan ". $pembayaran->getMonthName($_POST['month']);
+				echo $pembayaran->getName($_POST['siswa'])." pada bulan ". $fungsi->getMonthName($_POST['month']);
 			}?>
 		</h3>
 		<div class="clearfix"></div>
@@ -42,7 +42,6 @@ $month = $fungsi->getMonth($tanggal);
 					  </div>";
 			}
 			unset($_SESSION['notif']);
-			
 		 }
 	?>
 	<?php
@@ -86,7 +85,7 @@ $month = $fungsi->getMonth($tanggal);
 				echo "<p>Nama Siswa: ".$data['nama_siswa']."</p>";
 				echo "<p>Jenis Instrument : ".$data['nama_instrument']."</p>";
 				echo "<p>Uang Bulanan: Rp. ".$fungsi->formatindo($data['biaya_instrument']).",- ";
-				if($data['biaya_instrument'] == $data['jumlah']){
+				if($data['biaya_instrument'] <= $data['jumlah']){
 					echo "<span class='label label-success'>Telah lunas membayar</span>";
 					echo "</p><br>"
 						."<div class='col-lg-offset-2 col-lg-9'>"

@@ -40,20 +40,37 @@
 			return $row['cekJadwal'];
 		}
 		
-		public function saveJadwal($siswa, $pengajar, $shift) {
+		public function cekJadwalPengajar($pengajar, $shift){
+			$this->dbOpen();
+			$sql = "SELECT COUNT(*) AS cekJadwalPengajar FROM jadwal WHERE id_pengajar= '$pengajar' AND id_shift = '$shift'";
+			$query = mysqli_query($this->conn, $sql);
+			$row =  mysqli_fetch_array($query);
+
+			return $row[0];
+		}
+		
+		public function saveJadwal($siswa, $pengajar, $shift, $hari) {
 			$this->dbOpen();
 			$siswa= mysqli_real_escape_string($this->conn, $siswa);
 			$pengajar= mysqli_real_escape_string($this->conn, $pengajar);
 			$shift= mysqli_real_escape_string($this->conn, $shift);
-						
-			$sql="INSERT INTO jadwal(id_jadwal, id_shift, id_pengajar, id_siswa)"
-			   . "VALUES ('', '$shift', '$pengajar', '$siswa')";
-			$query=mysqli_query($this->conn, $sql);
-			if ($query==true){
-				$_SESSION['notif']="successJadwal";
+			$hari= mysqli_real_escape_string($this->conn, $hari);
+			
+			$cek = $this->cekJadwalPengajar($pengajar, $shift);
+			if($cek != 0){
+				$_SESSION['notif']="duplicatePengajar";
+				header('Location: ../?p=jadwal&sub=tambah&id='.$hari);
 			}
-			$this->dbClose();
-			header('Location: ../?p=jadwal');			
+			else{
+				$sql="INSERT INTO jadwal(id_jadwal, id_shift, id_pengajar, id_siswa)"
+				   . "VALUES ('', '$shift', '$pengajar', '$siswa')";
+				$query=mysqli_query($this->conn, $sql);
+				if ($query==true){
+					$_SESSION['notif']="successJadwal";
+				}
+				$this->dbClose();
+				header('Location: ../?p=jadwal');
+			}
 		}
 		
 		public function deleteJadwal($id) {

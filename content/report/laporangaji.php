@@ -1,4 +1,4 @@
-<?php
+	<?php
 	$tanggal = date('Y-m-d');
 	require_once ('../classes/mainClass.php');
     require_once ('../classes/fungsiClass.php');
@@ -28,7 +28,7 @@
     <div id="wrapper">
         <div id="page-wrapper" style="padding: 5px;">
             <div class="row">
-                <div class="col-xs-8 col-xs-offset-2 text-center">
+                <div class="col-xs-12 text-center">
                     <h3><?php echo strtoupper($setting->loadSetting('nama'));?></h3>
                     <h5>Alamat : <?php echo $setting->loadSetting('alamat');?>, Telepon : <?php echo strtoupper($setting->loadSetting('telepon'));?></h5>
                 </div>

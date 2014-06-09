@@ -56,16 +56,20 @@
             $id= mysqli_real_escape_string($this->conn, $id);
             $pass= mysqli_real_escape_string($this->conn, $pass);
             $pass= md5($pass);
+			
             $sql="SELECT username, jenis FROM login WHERE username='$id' AND password='$pass'";
-            $query=mysqli_query($this->conn, $sql);
-            if(mysqli_num_rows($query)==1){
+            
+			$query=mysqli_query($this->conn, $sql);
+            
+			if(mysqli_num_rows($query)==1){
                 while ($row=  mysqli_fetch_array($query)){
 					$_SESSION['notif'] = "welcome";
-					$_SESSION['usernya'] = $row[0];
-					if($row['jenis'] == 'pemilik'){						
+					$_SESSION['nama'] = $row[1];
+					$_SESSION['usernya'] = $row[1];
+					if($row[1] == 'pemilik'){						
 						$_SESSION['prive'] = 0;
 					}
-					else if($row['jenis'] == 'admin'){
+					else if($row[1] == 'admin'){
 						$_SESSION['prive'] = 1;
 					}
                     else{
@@ -80,12 +84,81 @@
                header('Location: ../');
             }            
         }
-        
+		
         public function userLogout() {
             unset($_SESSION['usernya']);            
             unset($_SESSION['prive']);
             header('Location: ../');
         }
+		
+		public function saveUser($username, $passwordold, $passwordnew, $validasi, $prive){
+			$this->dbOpen();
+			$username= mysqli_real_escape_string($this->conn, $username);
+			$passwordold= mysqli_real_escape_string($this->conn, $passwordold);
+			$passwordnew= mysqli_real_escape_string($this->conn, $passwordnew);
+			$validasi= mysqli_real_escape_string($this->conn, $validasi);
+			if($prive == 0){
+				$prive = "pemilik";
+			}
+			else if($prive == 1){
+				$prive = "admin";
+			}
+			
+			if($passwordnew == $validasi){
+				$passwordnew = md5($passwordnew);
+				
+				$valid = $this->cekPassword($passwordold, $prive);
+				
+				if($valid == 1){
+					$sql = "INSERT INTO login (username, password,jenis) VALUES('$username', '$passwordnew', '$prive') ON DUPLICATE KEY UPDATE username='$username', password='$passwordnew'";
+
+					$query=mysqli_query($this->conn, $sql);
+					if ($query==true){
+						$_SESSION['notif']="suksesUpdate";
+					}
+					else {
+						$_SESSION['notif']="gagalUpdate";
+				   }
+				   $this->dbClose();
+				   header('Location: ../?p=informasi&sub=user');
+				}
+				else{
+					$_SESSION['notif']="wrongPass";
+					header('Location: ../?p=informasi&sub=user&edit');
+				}
+			}
+			else{
+				$_SESSION['notif']="notValid";
+				header('Location: ../?p=informasi&sub=user&edit');
+			}
+			
+		}
+		
+		public function pickUser($prive){
+			$this->dbOpen();
+			$prive= mysqli_real_escape_string($this->conn, $prive);
+			if($prive == 0){
+				$prive = "pemilik";
+			}
+			else if($prive == 1){
+				$prive = "admin";
+			}
+			$sql = "SELECT username FROM login WHERE jenis = '$prive'";
+
+			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
+			$row =  mysqli_fetch_array($query);			
+			
+			return $row[0];
+		}
+		private function cekPassword($pass, $jenis){
+			$this->dbOpen();		
+			
+			$sql = "SELECT COUNT(*) FROM login WHERE jenis = '$jenis' AND password = md5('$pass')";			
+			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
+			$row =  mysqli_fetch_array($query);			
+			
+			return $row[0];
+		}
     }
      
     class settingApps extends dbController{
@@ -107,7 +180,8 @@
 			$nama= mysqli_real_escape_string($this->conn, $nama);
 			$value= mysqli_real_escape_string($this->conn, $value);
 						
-			$sql = "UPDATE setting SET value='$value' WHERE nama_setting='$nama'";
+			$sql = "INSERT INTO setting (nama_setting, value) VALUES('$nama', '$value') ON DUPLICATE KEY UPDATE value='$value'";
+
 			$query=mysqli_query($this->conn, $sql);
 			if ($query==true){
 				$_SESSION['notif']="suksesUpdate";

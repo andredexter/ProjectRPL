@@ -52,8 +52,9 @@
 		}
 		else if($act=='saveSiswa'){
 			$newsiswa = new siswa();
-			$total= str_replace('.','',$_POST['total']);
-			$newsiswa->saveSiswa($_POST['nama'], $_POST['tempatlahir'], $_POST['tanggallahir'], $_POST['alamat'], $_POST['telepon'], $_POST['tanggaldaftar'], $total, $_POST['instrument']);
+			$pendaftaran= str_replace('.','',$_POST['pendaftaran']);
+			$uangbulanan= str_replace('.','',$_POST['biayainstrument']);
+			$newsiswa->saveSiswa($_POST['nama'], $_POST['tempatlahir'], $_POST['tanggallahir'], $_POST['alamat'], $_POST['telepon'], $_POST['tanggaldaftar'], $pendaftaran, $uangbulanan, $_POST['instrument']);
 		}
 		else if($act=='editSiswa'){
 			$newsiswa = new siswa();
@@ -77,7 +78,7 @@
 		}
 		else if($act=='saveJadwal'){
 			$newjadwal = new jadwal();
-			$newjadwal->saveJadwal($_POST['siswa'], $_POST['pengajar'], $_POST['shift']);
+			$newjadwal->saveJadwal($_POST['siswa'], $_POST['pengajar'], $_POST['shift'], $_POST['hari']);
 		}
 		else if($act=='deleteJadwal'){
 			$newjadwal = new jadwal();
@@ -107,6 +108,10 @@
 			$informasi->saveInfo('alamat', $_POST['alamat']);
 			$informasi->saveInfo('kota', $_POST['kota']);
 			$informasi->saveInfo('pemilik', $_POST['pemilik']);
+		}
+		else if($act=='saveUser'){
+			$user= new userController();            
+            $user->saveUser($_POST['username'], $_POST['passwordold'], $_POST['passwordnew'], $_POST['validasi'], $_POST['prive']);
 		}
 		else if($act=='getBiaya'){
 			$instrument= new instrument();

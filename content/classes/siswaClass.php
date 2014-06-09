@@ -1,4 +1,6 @@
 <?php
+	require_once('pembayaranClass.php');
+	
 	class siswa extends dbController{
 		public function getSiswa($start) {
 			$this->dbOpen();
@@ -51,7 +53,7 @@
 			return $row[0];
 		}
 		
-		public function saveSiswa($nama, $tempat, $tanggal, $alamat, $telp, $daftar, $biaya, $instrument) {
+		public function saveSiswa($nama, $tempat, $tanggal, $alamat, $telp, $daftar, $biaya, $uangbulanan, $instrument) {
 			$this->dbOpen();
 			$nama = mysqli_real_escape_string($this->conn, $nama);
 			$tempat= mysqli_real_escape_string($this->conn, $tempat);
@@ -60,6 +62,8 @@
 			$telp= mysqli_real_escape_string($this->conn, $telp);
 			$daftar= mysqli_real_escape_string($this->conn, $daftar);
 			$biaya= mysqli_real_escape_string($this->conn, $biaya);
+			$biaya= mysqli_real_escape_string($this->conn, $biaya);
+			$uangbulanan= mysqli_real_escape_string($this->conn, $uangbulanan);
 			$instrument= mysqli_real_escape_string($this->conn, $instrument);
 			
 			$baris = $this->cekSiswa($nama, $tempat, $tanggal);
@@ -82,6 +86,11 @@
 				$query=mysqli_query($this->conn, $sql);
 				if ($query==true){
 					$_SESSION['notif']="success";
+					
+					$bln = explode('-',$daftar);
+					$bulan = $bln[0]."-".$bln[1]."-01";
+					
+					$this->savePembayaranSiswa($nama, $tempat, $tanggal, $telp, $bulan, $uangbulanan);
 				}
 				else {
 					$_SESSION['notif']="fail";
@@ -133,6 +142,21 @@
 		   }
 		   $this->dbClose();
 		   header('Location: ../?p=siswa&sub=lihat');
+		}
+		
+		public function savePembayaranSiswa($nama, $tempat, $tanggal, $telepon, $bulan, $uangbulanan){
+			$this->dbOpen();
+			$sql = "SELECT id_siswa FROM siswa WHERE nama_siswa= '$nama' AND tempat_lahir = '$tempat' AND tanggal_lahir = '$tanggal' AND telepon = '$telepon'";
+			
+			$query = mysqli_query($this->conn, $sql);
+			$row =  mysqli_fetch_array($query);
+
+			$id_siswa =  $row[0];
+			
+			$sql="INSERT INTO pembayaran(id_pembayaran, bulan, id_siswa, jumlah)"
+			   . "VALUES ('', '$bulan', '$id_siswa', '$uangbulanan')";
+			$query=mysqli_query($this->conn, $sql);
+			$this->dbClose();
 		}
 		
 		public function pickSiswa($id){

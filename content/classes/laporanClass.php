@@ -65,18 +65,7 @@
 			
 			$row =  mysqli_fetch_array($query);			
 			
-			return $row['nama_siswa'];
-		}
-		
-		public function getMonthName($bln){
-			$day = array("Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu");
-			$nama_bln=array(1=> "Januari", "Februari", "Maret", "April", "Mei", 
-                    "Juni", "Juli", "Agustus", "September", 
-                    "Oktober", "November", "Desember");
-					
-			$tgl = explode('-', $bln);
-			
-			return $nama_bln[intval($tgl[1])]." ".$tgl[0];
+			return $row[0];
 		}
 		
 		public function getGaji($bln, $id) {
@@ -217,7 +206,7 @@
 			return $row[0];
 		}
 		
-		public function getSaldoBefore($bln){
+		function getSaldoBefore($bln){
 			$this->dbOpen();
 			$bln= mysqli_real_escape_string($this->conn, $bln);
 			

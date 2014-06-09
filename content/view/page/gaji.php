@@ -45,34 +45,42 @@ $month = $fungsi->getMonth($tanggal);
 				</thead>
 				<tbody>
 		<?php
-		$i=1;
-		foreach ($getPenggajian as $data) {
-			 echo "<tr>"
-				. "<td>".$i."</td>"
-				. "<td>".$data['nama_pengajar']."</td>";
-				if($data['jumlah_mengajar'] == 0){
-					echo "<td>Tidak ada record mengajar yang dicatat pada bulan ini</td>";
-					echo "<td><form method='post' action='content/report/laporangaji.php'>"
-									."<input type='hidden' id='idpengajar' name='idpengajar' value='".md5($data['id_pengajar'])."' required>"
-									."<input type='hidden' id='bln' name='bln' value='".$_POST['month']."' required>"
-									."<button type='submit' class='btn btn-block btn-success disabled' formtarget='_blank'>Print Gaji</button></td>"
-									."</form></td>";					
-				}
-				else {
-					echo "<td>".$data['jumlah_mengajar']." orang siswa</td>";
-					echo "<td><form method='post' action='content/report/laporangaji.php'>"
-									."<input type='hidden' id='idpengajar' name='idpengajar' value='".md5($data['id_pengajar'])."' required>"
-									."<input type='hidden' id='bln' name='bln' value='".$_POST['month']."' required>"
-									."<button type='submit' class='btn btn-block btn-success' formtarget='_blank'>Print Gaji</button></td>"
-									."</form></td>";
-				}
-			 
-				echo "</tr>";
-			
-		$i++;
-						
+		if($getPenggajian == null){
+			echo"<tr>"
+				. "<td colspan='10'><div class='alert alert-danger text-center'>Data Kosong"
+				."</div></td>"
+				. "</tr>";
 		}
-		
+		else{
+			$i=1;
+			foreach ($getPenggajian as $data) {
+				 echo "<tr>"
+					. "<td>".$i."</td>"
+					. "<td>".$data['nama_pengajar']."</td>";
+					if($data['jumlah_mengajar'] == 0){
+						echo "<td>Tidak ada record mengajar yang dicatat pada bulan ini</td>";
+						echo "<td><form method='post' action='content/report/laporangaji.php'>"
+										."<input type='hidden' id='idpengajar' name='idpengajar' value='".md5($data['id_pengajar'])."' required>"
+										."<input type='hidden' id='bln' name='bln' value='".$_POST['month']."' required>"
+										."<button type='submit' class='btn btn-block btn-success disabled' formtarget='_blank'>Print Gaji</button></td>"
+										."</form></td>";					
+					}
+					else {
+						echo "<td>".$data['jumlah_mengajar']." orang siswa</td>";
+						echo "<td><form method='post' action='content/report/laporangaji.php'>"
+										."<input type='hidden' id='idpengajar' name='idpengajar' value='".md5($data['id_pengajar'])."' required>"
+										."<input type='hidden' id='bln' name='bln' value='".$_POST['month']."' required>"
+										."<button type='submit' class='btn btn-block btn-success' formtarget='_blank'>Print Gaji</button></td>"
+										."</form></td>";
+					}
+				 
+					echo "</tr>";
+				
+			$i++;
+							
+			}
+		}
+			
 	}
 	
 	else if(!isset($_GET['siswa']) || !isset($_GET['bln'])){
