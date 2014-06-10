@@ -2,9 +2,9 @@
 	$limit = 10;  
 	if (isset($_GET["page"])) { $page = $_GET["page"]; } else { $page=1; };
 	$start_from = ($page-1) * $limit;
-    require_once ('content/classes/fungsiClass.php');
+    require_once ('content/fungsi.php');
     require_once ('content/classes/instrumentClass.php');
-	$fungsi = new fungsi();
+	
     $instrument= new instrument();
     $dataInstrument = $instrument->getInstrument($start_from);  
 
@@ -113,7 +113,7 @@
 									echo"<tr class=''>"
 										. "<td>".$i."</td>"
 										. "<td>".$data['nama']."</td>"
-										. "<td>".$data['biaya']."</td>"
+										. "<td>Rp. ".formatindo($data['biaya'])."</td>"
 										. "<td><a href='?p=instrument&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm' disabled='disabled'>Edit Data</a></td>"
 										. "<td><a href='?p=instrument&page=".$page."&c=".md5($data['id'])."' class='btn btn-danger	btn-block  btn-sm' disabled='disabled'>Hapus</a></td>"
 										. "</tr>";
@@ -134,7 +134,7 @@
 									echo"<tr>"
 										. "<td>".$i."</td>"
 										. "<td>".$data['nama']."</td>"
-										. "<td>".$data['biaya']."</td>"
+										. "<td>Rp. ".formatindo($data['biaya'])."</td>"
 										. "<td><a href='?p=instrument&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm' disabled='disabled'>Edit Data</a></td>"
 										. "<td><a href='?p=instrument&page=".$page."&c=".md5($data['id'])."' class='btn btn-danger	btn-block  btn-sm' disabled='disabled'>Hapus</a></td>"
 										. "</tr>";
@@ -143,7 +143,7 @@
 									echo"<tr>"
 										. "<td>".$i."</td>"
 										. "<td>".$data['nama']."</td>"
-										. "<td> Rp. ".$fungsi->formatindo($data['biaya'])."</td>"
+										. "<td> Rp. ".formatindo($data['biaya'])."</td>"
 										. "<td><a href='?p=instrument&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm'>Edit Data</a></td>"
 										. "<td><a href='?p=instrument&page=".$page."&c=".md5($data['id'])."' class='btn btn-danger	btn-block  btn-sm'>Hapus</a></td>"
 										. "</tr>";

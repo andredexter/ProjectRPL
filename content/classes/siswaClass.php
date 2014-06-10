@@ -1,6 +1,4 @@
 <?php
-	require_once('pembayaranClass.php');
-	
 	class siswa extends dbController{
 		public function getSiswa($start) {
 			$this->dbOpen();
@@ -78,7 +76,6 @@
 				$_SESSION['daftar']= $daftar;
 				$_SESSION['biaya']= $biaya;
 				$_SESSION['instrument']= $instrument;
-				header('Location: ../?p=siswa&sub=tambah');
 			}
 			else{
 				$sql="INSERT INTO siswa(id_siswa, nama_siswa, tempat_lahir, tanggal_lahir, alamat, telepon, tanggal_masuk, uang_masuk, id_tingkat, id_instrument)"
@@ -96,7 +93,6 @@
 					$_SESSION['notif']="fail";
 				}
 				$this->dbClose();
-				header('Location: ../?p=siswa&sub=tambah');
 			}
 		}
 		
@@ -123,7 +119,6 @@
 				$_SESSION['namanya']=$nama;
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=siswa&sub=lihat');
 		}
 		
 		public function deleteSiswa($id, $nama) {
@@ -141,7 +136,6 @@
 				$_SESSION['notif']="deleteGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=siswa&sub=lihat');
 		}
 		
 		public function savePembayaranSiswa($nama, $tempat, $tanggal, $telepon, $bulan, $uangbulanan){

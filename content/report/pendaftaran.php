@@ -1,9 +1,9 @@
 <?php
 	$tanggal = date('Y-m-d');
     require_once ('../classes/mainClass.php');
-    require_once ('../classes/fungsiClass.php');
 	require_once ('../classes/siswaClass.php');
-    $fungsi = new fungsi();
+	require_once ('../fungsi.php');
+	
     $siswa = new siswa();
 	$setting = new settingApps();
 	
@@ -39,13 +39,13 @@
 				<h4><strong>Pendaftaran Siswa Baru</strong></h4>
                     <table class="table table-bordered">
                         <tbody>
-							<tr><td colspan="3" class="text-right small">Tanggal : <?php echo $fungsi->tglindo($tanggal) ?></td></tr>
+							<tr><td colspan="3" class="text-right small">Tanggal : <?php echo tglindo($tanggal) ?></td></tr>
                             <?php
                                 $i=1;
                                 foreach ($siswabaru as $data) {
                                     echo "<tr><td colspan='3'><strong>Data Umum</strong></td></tr>";
 									echo "<tr><td colspan='3'>"
-										."<div class='col-xs-3 col-xs-offset-1'>"
+										."<div class='col-xs-4 col-xs-offset-1'>"
 										."<p>1. Nama</p>"
 										."<p>2. Tempat / Tanggal Lahir</p>"
 										."<p>3. Alamat</p>"
@@ -53,7 +53,7 @@
 										."</div>"
 										."<div class='col-xs-5'>"
 										."<p>: ".$data['nama_siswa']."</p>"
-										."<p>: ".$data['tempat_lahir']."/ ".$fungsi->tglindo($data['tanggal_lahir'])."</p>"
+										."<p>: ".$data['tempat_lahir']."/ ".tglindo($data['tanggal_lahir'])."</p>"
 										."<p>: ".$data['alamat']."</p>"
 										."<p>: ".$data['telepon']."</p>"
 										."</div>"
@@ -66,7 +66,7 @@
 										."<p> Instrument yang dipilih</p>"
 										."</div>"
 										."<div class='col-xs-5'>"
-										."<p>: ".$fungsi->tglindo($data['tanggal_masuk'])."</p>"
+										."<p>: ".tglindo($data['tanggal_masuk'])."</p>"
 										."<p>: ".$data['nama_instrument']."</p>"
 										."</div>"
 										."</td></tr>";
@@ -80,10 +80,10 @@
 										."<p> Total</p>"
 										."</div>"
 										."<div class='col-xs-5'>"
-										."<p>: Rp. ".$fungsi->formatindo($data['uang_masuk'])."</p>"
-										."<p>: Rp. ".$fungsi->formatindo($data['biaya_instrument'])."</p>"
+										."<p>: Rp. ".formatindo($data['uang_masuk'])."</p>"
+										."<p>: Rp. ".formatindo($data['biaya_instrument'])."</p>"
 										."<hr>"
-										."<p>: Rp. ".$fungsi->formatindo($data['uang_masuk']+$data['biaya_instrument'])."</p>"
+										."<p>: Rp. ".formatindo($data['uang_masuk']+$data['biaya_instrument'])."</p>"
 										."</div>"
 										."</td></tr>";
                                     $i++;
@@ -96,7 +96,7 @@
 			<div class="row">
 				<div class="col-xs-5 pull-right text-center">
 				<?php 
-					echo "<p>".$setting->loadSetting('kota').", ".$fungsi->tglindo($tanggal)."</p>"
+					echo "<p>".$setting->loadSetting('kota').", ".tglindo($tanggal)."</p>"
 						."</br></br>ttd</br></br></br>"
 						."<p>".$setting->loadSetting('pemilik')."</p>"
 						."<p>Pemilik</p>";

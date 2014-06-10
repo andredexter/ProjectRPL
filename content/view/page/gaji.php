@@ -1,11 +1,11 @@
 <?php
 $tanggal = date('Y-m-d');
 require_once ('content/classes/laporanClass.php');
-require_once ('content/classes/fungsiClass.php');
+require_once ('content/fungsi.php');
 
 $gaji= new laporangaji();
-$fungsi= new fungsi();
-$month = $fungsi->getMonth($tanggal);
+
+$month = getMonth($tanggal);
 ?>
 
 <div class="page-content">
@@ -15,7 +15,7 @@ $month = $fungsi->getMonth($tanggal);
 		<!-- Heading -->
 		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Penggajian Pengajar
 			<?php if(isset($_POST['month'])){
-				echo "pada bulan ". $fungsi->getMonthName($_POST['month']);
+				echo "pada bulan ". getMonthName($_POST['month']);
 				?>
 				<br>
 				<br>

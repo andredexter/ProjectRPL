@@ -1,12 +1,11 @@
 <?php
 $tanggal = date('Y-m-d');
 require_once ('content/classes/absensiClass.php');
-require_once ('content/classes/fungsiClass.php');
+require_once ('content/fungsi.php');
 
 $absensi= new absensi();
-$fungsi= new fungsi();
 $dataSiswa= $absensi->getSiswa();  
-$month = $fungsi->getMonth($tanggal);
+$month = getMonth($tanggal);
 ?>
 
 <div class="page-content">
@@ -17,7 +16,7 @@ $month = $fungsi->getMonth($tanggal);
 		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Absensi 
 			<?php 
 			if(isset($_POST['month'])&&isset($_POST['siswa'])){
-				echo $absensi->getName($_POST['siswa'])." pada bulan ". $fungsi->getMonthName($_POST['month']);
+				echo $absensi->getName($_POST['siswa'])." pada bulan ". getMonthName($_POST['month']);
 			}?>
 		</h3>
 		<div class="clearfix"></div>
@@ -58,7 +57,7 @@ $month = $fungsi->getMonth($tanggal);
 				else {
 					$i=1;
 					foreach ($cekJadwal as $data) {
-						echo "<p>Jadwal : ".$data['nama_hari'].", ".$fungsi->regenerateJam($data['jam_mulai'])." - ".$fungsi->regenerateJam($data['jam_akhir'])."</p>";
+						echo "<p>Jadwal : ".$data['nama_hari'].", ".regenerateJam($data['jam_mulai'])." - ".regenerateJam($data['jam_akhir'])."</p>";
 						echo "<p>Nama Siswa : ".$data['nama_siswa']."</p>";
 						echo "<p>Nama Pengajar : ".$data['nama_pengajar']."</p>";
 						echo "<form class='form-horizontal' role='form' action='content/proses.php?act=saveAbsen' method='post'>"
@@ -98,7 +97,7 @@ $month = $fungsi->getMonth($tanggal);
 		else {
 			$i=1;
 			foreach ($cekAbsensi as $data) {
-				echo "<p>Jadwal : ".$data['nama_hari'].", ".$fungsi->regenerateJam($data['jam_mulai'])." - ".$fungsi->regenerateJam($data['jam_akhir'])."</p>";
+				echo "<p>Jadwal : ".$data['nama_hari'].", ".regenerateJam($data['jam_mulai'])." - ".regenerateJam($data['jam_akhir'])."</p>";
 				echo "<p>Nama Siswa : ".$data['nama_siswa']."</p>";
 				echo "<p>Nama Pengajar : ".$data['nama_pengajar']."</p>";
 				echo "<form class='form-horizontal' role='form' action='content/proses.php?act=editAbsen' method='post'>"

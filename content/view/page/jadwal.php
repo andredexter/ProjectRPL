@@ -1,8 +1,9 @@
 <?php
     require_once ('content/classes/jadwalClass.php');
-    require_once ('content/classes/fungsiClass.php');
+    require_once ('content/fungsi.php');
+	
 	$jadwal= new jadwal();
-	$fungsi= new fungsi();
+	
 	$dataHari = $jadwal->selectDays();
 	$dataJadwal = $jadwal->selectJadwal();
 ?>
@@ -89,7 +90,7 @@
 											}
 											else{
 												echo"<tr>"
-													. "<td>".$fungsi->regenerateJam($data2['jam_mulai'])."-".$fungsi->regenerateJam($data2['jam_akhir'])."</td>"
+													. "<td>".regenerateJam($data2['jam_mulai'])."-".regenerateJam($data2['jam_akhir'])."</td>"
 													. "<td>".$data2['nama_siswa']." (".$data2['nama_instrument'].")</td>"
 													. "<td>".$data2['nama_pengajar']."</td>"
 													. "<td>"

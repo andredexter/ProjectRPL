@@ -49,7 +49,6 @@
 			
 			if($cek!=0){
 				$_SESSION['notif']="duplicate";
-				header('Location: ../?p=instrument&sub=tambah');
 			}
 			else{
 				$sql="INSERT INTO instrument(id_instrument, nama_instrument, biaya_instrument)"
@@ -62,7 +61,6 @@
 					$_SESSION['notif']="failSave";
 				}
 				$this->dbClose();
-				header('Location: ../?p=instrument&sub=tambah');
 			}
 		}
 		
@@ -82,7 +80,6 @@
 				$_SESSION['notif']="editGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=instrument');
 		}
 		
 		public function deleteInstrument($id, $nama) {
@@ -100,7 +97,6 @@
 				$_SESSION['notif']="deleteGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=instrument');
 		}
 		
 		public function getBiaya($id) {

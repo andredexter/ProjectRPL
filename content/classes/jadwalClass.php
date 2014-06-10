@@ -37,7 +37,7 @@
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
 
-			return $row['cekJadwal'];
+			return $row[0];
 		}
 		
 		public function cekJadwalPengajar($pengajar, $shift){
@@ -59,7 +59,8 @@
 			$cek = $this->cekJadwalPengajar($pengajar, $shift);
 			if($cek != 0){
 				$_SESSION['notif']="duplicatePengajar";
-				header('Location: ../?p=jadwal&sub=tambah&id='.$hari);
+				$header = "Location: ../?p=jadwal&sub=tambah&id=".$hari;
+				return $header;
 			}
 			else{
 				$sql="INSERT INTO jadwal(id_jadwal, id_shift, id_pengajar, id_siswa)"
@@ -69,7 +70,8 @@
 					$_SESSION['notif']="successJadwal";
 				}
 				$this->dbClose();
-				header('Location: ../?p=jadwal');
+				$header = "Location: ../?p=jadwal";
+				return $header;
 			}
 		}
 		
@@ -85,8 +87,7 @@
 			else {
 				$_SESSION['notif']="deleteGagal";
 		   }
-		   $this->dbClose();
-		   header('Location: ../?p=jadwal');
+		   $this->dbClose();		  
 		}
 		
 		function getShift($id){

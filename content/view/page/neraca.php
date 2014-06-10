@@ -1,11 +1,11 @@
 <?php
 $tanggal = date('Y-m-d');
 require_once ('content/classes/laporanClass.php');
-require_once ('content/classes/fungsiClass.php');
+require_once ('content/fungsi.php');
 
 $neraca= new neraca();
-$fungsi= new fungsi();
-$month = $fungsi->getMonth($tanggal);
+
+$month = getMonth($tanggal);
 ?>
 
 <div class="page-content">
@@ -15,7 +15,7 @@ $month = $fungsi->getMonth($tanggal);
 		<!-- Heading -->
 		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Laporan Keuangan
 			<?php if(isset($_POST['month'])){
-				echo "pada bulan ". $fungsi->getMonthName($_POST['month']);
+				echo "pada bulan ". getMonthName($_POST['month']);
 				?>
 				<br>
 				<br>
@@ -40,7 +40,7 @@ $month = $fungsi->getMonth($tanggal);
 									."</form>";?>
 		<h3>Laporan Keuangan</h3>
 		
-		<p>Bulan : <?php echo $fungsi->getMonthName($_POST['month'])?> </p>
+		<p>Bulan : <?php echo getMonthName($_POST['month'])?> </p>
 		<table class="table table-hover table-bordered ">
 				<thead>
 					<tr>
@@ -56,10 +56,10 @@ $month = $fungsi->getMonth($tanggal);
 						<td><h4><strong>Saldo Sebelumnya</strong></h4></td>
 						<td></td>
 						<?php
-						$saldo = $neraca->getSaldoBefore($fungsi->casttanggal($_POST['month']));
+						$saldo = $neraca->getSaldoBefore(casttanggal($_POST['month']));
 						
 						?>
-						<td><?php echo "Rp. ".$fungsi->formatindo($saldo)?></td>
+						<td><?php echo "Rp. ".formatindo($saldo)?></td>
 					</tr>
 					<tr>
 						<td><h4><strong>2</strong></h4></td>
@@ -81,7 +81,7 @@ $month = $fungsi->getMonth($tanggal);
 									echo "<td></td>";
 								}
 								else {
-									echo "<td>Rp. ".$fungsi->formatindo($data['jumlah_masuk'])."</td>";
+									echo "<td>Rp. ".formatindo($data['jumlah_masuk'])."</td>";
 									echo "<td></td>";
 								}
 							 echo "</tr>";
@@ -97,7 +97,7 @@ $month = $fungsi->getMonth($tanggal);
 									echo "<td></td>";
 								}
 								else {
-									echo "<td>Rp. ".$fungsi->formatindo($data['jumlah_bayar'])."</td>";
+									echo "<td>Rp. ".formatindo($data['jumlah_bayar'])."</td>";
 									echo "<td></td>";
 								}
 							 echo "</tr>";
@@ -107,7 +107,7 @@ $month = $fungsi->getMonth($tanggal);
 						echo "<tr>"
 							."<td colspan='2' class='text-right'>Jumlah</td>"
 							."<td></td>"
-							."<td>Rp. ".$fungsi->formatindo($totalMasuk)."</td>"
+							."<td>Rp. ".formatindo($totalMasuk)."</td>"
 							."</tr>";
 					?>
 					<tr>
@@ -129,7 +129,7 @@ $month = $fungsi->getMonth($tanggal);
 									echo "<td></td>";
 								}
 								else {
-									echo "<td>Rp. ".$fungsi->formatindo($data['jumlah_gaji'])."</td>";
+									echo "<td>Rp. ".formatindo($data['jumlah_gaji'])."</td>";
 									echo "<td></td>";
 								}
 							 echo "</tr>";
@@ -139,12 +139,12 @@ $month = $fungsi->getMonth($tanggal);
 						echo "<tr>"							
 							."<td colspan='2' class='text-right'>Jumlah</td>"
 							."<td></td>"
-							."<td>Rp. ".$fungsi->formatindo($totalKeluar	)."</td>"
+							."<td>Rp. ".formatindo($totalKeluar	)."</td>"
 							."</tr>";
 					
 					$sisa_akhir = $saldo + $totalMasuk - $totalKeluar;
 					echo "<tr><td colspan='3' class='text-right'><h4><strong>Sisa </strong></h4></td>"
-						."<td>Rp. ".$fungsi->formatindo($sisa_akhir)."</td></tr>";
+						."<td>Rp. ".formatindo($sisa_akhir)."</td></tr>";
 					echo "</tbody></table>";
 	}
 	

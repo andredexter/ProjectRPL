@@ -107,7 +107,6 @@
 				$bagiGaji->bagiGaji($bln, $idsiswa, 0);
 			}
 			$this->dbClose();
-			header('Location: ../?p=absensi');			
 		}
 		
 		public function editAbsen($id, $hadirsiswa, $hadirpengajar) {
@@ -128,7 +127,6 @@
 				$_SESSION['notif']="editGagal";				
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=absensi');
 		}
 		
 		public function getName($siswa){
@@ -138,7 +136,6 @@
 			$sql = "SELECT nama_siswa FROM siswa WHERE id_siswa = $siswa";
 			
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			
 			$row =  mysqli_fetch_array($query);			
 			
 			return $row[0];

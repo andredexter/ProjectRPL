@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Jun 2014 pada 14.44
+-- Generation Time: 10 Jun 2014 pada 13.28
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -37,14 +37,16 @@ CREATE TABLE IF NOT EXISTS `absen` (
   PRIMARY KEY (`id_absen`),
   KEY `id_pengajar` (`id_pengajar`),
   KEY `id_siswa` (`id_siswa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `absen`
 --
 
 INSERT INTO `absen` (`id_absen`, `bulan`, `jumlah_absen`, `id_pengajar`, `hadir_pengajar`, `id_siswa`, `hadir_siswa`) VALUES
-(1, '2014-06-01', 4, 1, 4, 1, 4);
+(1, '2014-06-01', 4, 2, 4, 1, 4),
+(2, '2014-06-01', 4, 4, 3, 2, 4),
+(3, '2014-06-01', 4, 3, 4, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -82,25 +84,24 @@ CREATE TABLE IF NOT EXISTS `instrument` (
   `nama_instrument` varchar(20) NOT NULL,
   `biaya_instrument` int(15) NOT NULL,
   PRIMARY KEY (`id_instrument`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data untuk tabel `instrument`
 --
 
 INSERT INTO `instrument` (`id_instrument`, `nama_instrument`, `biaya_instrument`) VALUES
-(7, 'Gitar', 500000),
-(9, 'Seriosa', 1200000),
-(10, 'Sasando', 1000000),
-(11, 'Terompet', 200000),
-(12, 'Pluit', 50000),
-(13, 'Talempong', 150000),
-(14, 'Bass', 240000),
-(15, 'Harmonika', 150000),
-(16, 'Gong', 100000),
-(17, 'Seruling', 150000),
-(19, 'Ukulele', 100000),
-(20, 'Piano', 1000000);
+(1, 'Guitar Electric', 200000),
+(2, 'Piano Pop', 250000),
+(3, 'Drum', 300000),
+(4, 'Violin', 200000),
+(5, 'Cello', 300000),
+(6, 'Contrabass', 200000),
+(7, 'Piano Jazz', 250000),
+(8, 'Piano Classic', 300000),
+(9, 'Keyboard', 340000),
+(10, 'Saxophone', 400000),
+(11, 'Guitar Bass', 320000);
 
 -- --------------------------------------------------------
 
@@ -117,14 +118,16 @@ CREATE TABLE IF NOT EXISTS `jadwal` (
   KEY `id_shift` (`id_shift`,`id_pengajar`,`id_siswa`),
   KEY `id_pengajar` (`id_pengajar`),
   KEY `id_siswa` (`id_siswa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `jadwal`
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `id_shift`, `id_pengajar`, `id_siswa`) VALUES
-(1, 8, 1, 1);
+(1, 1, 2, 1),
+(3, 4, 3, 3),
+(2, 13, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -160,14 +163,16 @@ CREATE TABLE IF NOT EXISTS `pembagian` (
   `jumlah_management` int(15) NOT NULL,
   PRIMARY KEY (`id_bagi`),
   KEY `id_absen` (`id_absen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `pembagian`
 --
 
 INSERT INTO `pembagian` (`id_bagi`, `id_absen`, `jumlah_pengajar`, `jumlah_management`) VALUES
-(1, 25, 540000, 660000);
+(1, 1, 144000, 176000),
+(2, 2, 101250, 198750),
+(3, 3, 90000, 110000);
 
 -- --------------------------------------------------------
 
@@ -182,14 +187,16 @@ CREATE TABLE IF NOT EXISTS `pembayaran` (
   `jumlah` int(15) NOT NULL,
   PRIMARY KEY (`id_pembayaran`),
   KEY `id_siswa` (`id_siswa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `pembayaran`
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `bulan`, `id_siswa`, `jumlah`) VALUES
-(1, '2014-06-01', 2, 500000);
+(1, '2014-06-01', 1, 320000),
+(2, '2014-06-01', 2, 300000),
+(3, '2014-06-01', 3, 200000);
 
 -- --------------------------------------------------------
 
@@ -206,15 +213,17 @@ CREATE TABLE IF NOT EXISTS `pengajar` (
   `alamat` varchar(50) DEFAULT NULL,
   `telepon` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_pengajar`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data untuk tabel `pengajar`
 --
 
 INSERT INTO `pengajar` (`id_pengajar`, `nama_pengajar`, `tempat_lahir`, `tanggal_lahir`, `pendidikan`, `alamat`, `telepon`) VALUES
-(1, 'fajar lazuardi', 'padang', '1992-09-24', 'master', 'padang', '097987987987'),
-(2, 'adji', 'padang', '1993-07-24', 'Master1', 'padang', '087895435450');
+(1, 'Juan A. Mayon', 'Jakarta', '1980-04-21', 'Sarjana', 'Jl.Patimura No 2, Padang', '083180247283'),
+(2, 'Jason Holmes', 'Bandung', '1984-08-24', 'Sarjana', 'Jl.Adiyawarman No 3 Padang', '083616228383'),
+(3, 'Ernest Gaskill', 'Padang', '1988-02-10', 'Sarjana', 'Jl.CahLontong 23 Padang Panjang', '08292824123'),
+(4, 'Pierre Swift', 'Bukittinggi', '1989-10-03', 'Sarjana', 'Jl.Hihihihihihi 3 Padang', '0927312334');
 
 -- --------------------------------------------------------
 
@@ -233,10 +242,10 @@ CREATE TABLE IF NOT EXISTS `setting` (
 --
 
 INSERT INTO `setting` (`nama_setting`, `value`) VALUES
-('alamat', 'Jl.Adinegoro, Perum Indah Pratama Blok C 8, Lubuk '),
-('judul', 'Aplikasi Penggajian Salsa'),
+('alamat', 'Jl.Adinegoro, Perum Indah Pratama Blok C8 Simp Rum'),
+('judul', 'Penggajian Pengajar'),
 ('kota', 'Padang'),
-('nama', 'Salsa International Music School'),
+('nama', 'Salsha International Music School'),
 ('pemilik', 'Salsa International'),
 ('telepon', '0751-481635');
 
@@ -253,24 +262,26 @@ CREATE TABLE IF NOT EXISTS `shift` (
   `jam_akhir` time DEFAULT NULL,
   PRIMARY KEY (`id_shift`),
   KEY `id_hari` (`id_hari`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data untuk tabel `shift`
 --
 
 INSERT INTO `shift` (`id_shift`, `id_hari`, `jam_mulai`, `jam_akhir`) VALUES
-(2, 2, '07:00:00', '08:00:00'),
+(1, 2, '07:00:00', '08:00:00'),
+(2, 2, '08:00:00', '09:00:00'),
 (3, 3, '07:00:00', '08:00:00'),
-(4, 4, '07:00:00', '08:00:00'),
-(5, 5, '07:00:00', '08:00:00'),
-(6, 6, '07:00:00', '08:00:00'),
-(7, 7, '07:00:00', '08:00:00'),
-(8, 2, '08:00:00', '09:00:00'),
-(9, 3, '08:00:00', '09:00:00'),
-(10, 4, '08:00:00', '09:00:00'),
-(11, 6, '08:00:00', '09:00:00'),
-(12, 1, '07:00:00', '08:15:00');
+(4, 3, '08:00:00', '09:00:00'),
+(5, 4, '07:00:00', '08:00:00'),
+(6, 4, '08:00:00', '09:00:00'),
+(7, 5, '07:00:00', '08:00:00'),
+(8, 5, '08:00:00', '09:00:00'),
+(9, 6, '08:00:00', '09:00:00'),
+(10, 6, '07:00:00', '08:00:00'),
+(11, 7, '07:00:00', '08:00:00'),
+(12, 7, '08:00:00', '09:00:00'),
+(13, 3, '09:00:00', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -292,22 +303,16 @@ CREATE TABLE IF NOT EXISTS `siswa` (
   PRIMARY KEY (`id_siswa`),
   KEY `id_instrument` (`id_instrument`),
   KEY `id_tingkat` (`id_tingkat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `siswa`
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nama_siswa`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `telepon`, `tanggal_masuk`, `uang_masuk`, `id_tingkat`, `id_instrument`) VALUES
-(2, 'Andre Triandi Putra', 'Bukittinggi', '2014-05-06', 'Baso Agam', '083182501923', '2014-05-05', 400000, 2, 7),
-(7, 'Nisa Dwi Angresti', 'Padang', '2008-04-27', 'Padang', '0912380123', '2014-05-28', 450000, 2, 9),
-(8, 'Yudhi Hartadi', 'Padang', '1994-05-28', 'Jakarta', '90812313', '2014-05-28', 400000, 4, 10),
-(9, 'Hafiz Fajrin', 'Padang', '1993-05-02', 'Padang', '01390123', '2014-05-28', 400000, 3, 9),
-(10, 'Dina Apriana', 'Lubuk Basung', '1993-02-20', 'Lubuk Basuang', '02093', '2014-05-29', 350000, 3, 9),
-(15, 'Syaiful Afdhal', 'Padang', '1993-02-20', 'Lubuk Basuang', '02093', '2014-06-25', 400000, 3, 9),
-(18, 'M Rizki Darmawan', 'Padang', '2006-06-03', 'Pariaman', '20932380', '2014-06-03', 425000, 1, 11),
-(19, 'Fandi Ihsan', 'Bukittinggi', '1998-06-05', 'Lubuk Sikaping', '232931802', '2014-06-05', 560000, 2, 14),
-(20, 'Lewat PHPUnit', 'PHP', '2014-05-05', 'XAMPP', '404', '2014-06-06', 4000, 1, 7);
+(1, 'Andre Triandi Putra', 'Bukittinggi', '1993-05-02', 'Sungai Cubadak, Kecamatan Baso, Agam', '083182501923', '2014-06-10', 300000, 1, 11),
+(2, 'Hafiz Fajrin', 'Padang', '1993-06-10', 'Padang', '082929292929', '2014-06-10', 300000, 2, 8),
+(3, 'Nisa Dwi Angresti', 'Padang', '1994-03-11', 'Padang', '020932332', '2014-06-10', 300000, 1, 4);
 
 -- --------------------------------------------------------
 

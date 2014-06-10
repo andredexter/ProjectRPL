@@ -63,7 +63,6 @@
 				$_SESSION['pendidikan']= $pendidikan;
 				$_SESSION['telp']= $telp;
 				$_SESSION['alamat']= $alamat;
-				header('Location: ../?p=pengajar&sub=tambah');
 			}
 			else{
 				$sql="INSERT INTO pengajar(id_pengajar, nama_pengajar, tempat_lahir, tanggal_lahir, pendidikan, alamat, telepon)"
@@ -76,7 +75,6 @@
 					$_SESSION['notif']="fail";
 				}
 				$this->dbClose();
-				header('Location: ../?p=pengajar&sub=tambah');
 			}
 		}
 		
@@ -100,7 +98,6 @@
 				$_SESSION['notif']="editGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=pengajar&sub=lihat');
 		}
 		
 		public function deletePengajar($id, $nama) {
@@ -118,7 +115,6 @@
 				$_SESSION['notif']="deleteGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=pengajar&sub=lihat');
 		}
 		
 		public function takeName($id){

@@ -1,6 +1,4 @@
 <?php
-	require_once ('fungsiClass.php');
-
 	class shiftTime extends dbController{
 		public function selectShift() {
 			$this->dbOpen();
@@ -31,24 +29,24 @@
 			$sql = "SELECT COUNT(*) AS cekShift FROM shift WHERE id_hari = '$id' AND jam_mulai = '$awal' AND jam_akhir = '$akhir'";
 			$query = mysqli_query($this->conn, $sql);
 			$row =  mysqli_fetch_array($query);
-			$rows = $row['cekShift'];
-			return $rows;
+			
+			return $row[0];
 		}
 		
 		public function saveShift($id, $awal, $akhir) {
-			$this->dbOpen();
-			$fungsi = new fungsi();
+			$this->dbOpen();			
 			$id = mysqli_real_escape_string($this->conn, $id);
 			$awal= mysqli_real_escape_string($this->conn, $awal);
 			$akhir= mysqli_real_escape_string($this->conn, $akhir);
 			
-			$baris = $this->cekShift($id, $fungsi->generateJam($awal), $fungsi->generateJam($akhir));
+			$baris = $this->cekShift($id, $awal, $akhir);
 			
 			if($baris!=0){
 				$_SESSION['notif']="wrongShift";
-				$_SESSION['jam_awal']=$fungsi->regenerateJam($awal);
-				$_SESSION['jam_akhir']=$fungsi->regenerateJam($akhir);
-				header('Location: ../?p=shift&sub=add&id='.$id);
+				$_SESSION['jam_awal']=$awal;
+				$_SESSION['jam_akhir']=$akhir;
+				$location = "Location: ../?p=shift&sub=add&id=".$id;
+				return $location;
 			}
 			else{
 				$sql="INSERT INTO shift(id_shift, id_hari, jam_mulai, jam_akhir)"
@@ -57,8 +55,9 @@
 				if ($query==true){
 					$_SESSION['notif']="successShift";
 				}
-				$this->dbClose();
-				header('Location: ../?p=shift');
+				$this->dbClose();				
+				$location = "Location: ../?p=shift";
+				return $location;
 			}
 		}
 		
@@ -77,7 +76,6 @@
 				$_SESSION['notif']="editGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=shift');
 		}
 		
 		public function deleteShift($id) {
@@ -94,7 +92,6 @@
 				$_SESSION['notif']="deleteGagal";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=shift');
 		}
 
 		function selectDays(){
@@ -139,6 +136,5 @@
 			$this->dbClose();
 			return $max;        		
 		}
-
 	}
 ?>

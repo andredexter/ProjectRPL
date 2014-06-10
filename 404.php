@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Title here -->
-		<title>404 Error Page - Barnie</title>
-		<!-- Description, Keywords and Author -->
-		<meta name="description" content="Your description">
-		<meta name="keywords" content="Your,Keywords">
-		<meta name="author" content="ResponsiveWebInc">
-		
+		<title>404 Error Page</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<!-- Styles -->
@@ -25,9 +19,7 @@
 	</head>
 	
 	<body>
-
 		<div class="outer-page">
-			
 			 <!-- Error page -->
 			 <div class="error-page br-lblue text-left">
 				<div class="error-page-inner">
@@ -56,14 +48,5 @@
 		<script src="js/respond.min.js"></script>
 		<!-- HTML5 Support for IE -->
 		<script src="js/html5shiv.js"></script>
-		
-		<!-- Javascript for this page -->
-		
-		<!-- Javascript for this page -->
-      
-        <script type="text/javascript">
-
-		</script>
-		
 	</body>	
 </html>

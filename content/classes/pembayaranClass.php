@@ -95,7 +95,6 @@
 				$_SESSION['notif']="success";
 			}
 			$this->dbClose();
-			header('Location: ../?p=pembayaran');
 		}
 		
 		public function editPembayaran($id, $jumlah) {
@@ -114,7 +113,6 @@
 				$_SESSION['notif']="editGagal";				
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=pembayaran');
 		}
 		
 		public function getName($siswa){

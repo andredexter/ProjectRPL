@@ -6,10 +6,9 @@ if(!isset($_GET['id'])){
 $tanggal = date('Y-m-d');
 
 require_once ('content/classes/jadwalClass.php');
-require_once ('content/classes/fungsiClass.php');
+require_once ('content/fungsi.php');
 
 $jadwal= new jadwal();
-$fungsi = new fungsi();
 
 $dataSiswa= $jadwal->getSiswa();  
 $dataPengajar= $jadwal->getPengajar();  
@@ -20,7 +19,7 @@ $dataShift= $jadwal->getShift($_GET['id']);
 	<!-- Heading -->
 	<div class="single-head">
 		<!-- Heading -->
-		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Jadwal Pelajaran Baru [ Hari : <?php echo $fungsi->selectHari($_GET['id'])?> ]</h3>
+		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Jadwal Pelajaran Baru [ Hari : <?php echo selectHari($_GET['id'])?> ]</h3>
 		<div class="clearfix"></div>
 	</div>
 	
@@ -101,7 +100,7 @@ $dataShift= $jadwal->getShift($_GET['id']);
 											echo"<option value='0'>- Pilih jam belajar -</option>";
 											$i=1;
 											foreach ($dataShift as $data) {
-												echo"<option value='".$data['id_shift']."'>".$fungsi->regenerateJam($data['jam_mulai'])." - ".$fungsi->regenerateJam($data['jam_akhir'])."</option>";
+												echo"<option value='".$data['id_shift']."'>".regenerateJam($data['jam_mulai'])." - ".regenerateJam($data['jam_akhir'])."</option>";
 												
 												$i++;
 											}

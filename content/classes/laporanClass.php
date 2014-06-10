@@ -61,8 +61,7 @@
 			
 			$sql = "SELECT nama_siswa FROM siswa WHERE id_siswa = $siswa";
 			
-			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-			
+			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));			
 			$row =  mysqli_fetch_array($query);			
 			
 			return $row[0];
@@ -122,6 +121,7 @@
 			$this->dbClose();
 			return $dataMasuk;
 		}
+		
 		public function getBayar($bln){
 			$this->dbOpen();
 			$bln= mysqli_real_escape_string($this->conn, $bln);			
@@ -145,6 +145,7 @@
 			$this->dbClose();
 			return $dataBayar;
 		}
+		
 		public function getGaji($bln){
 			$this->dbOpen();
 			$bln= mysqli_real_escape_string($this->conn, $bln);			

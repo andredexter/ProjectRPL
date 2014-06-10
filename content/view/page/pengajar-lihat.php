@@ -3,9 +3,9 @@
 	if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 	$start_from = ($page-1) * $limit;
     require_once ('content/classes/pengajarClass.php');
-    require_once ('content/classes/fungsiClass.php');
-    $pengajar = new pengajar();
-    $fungsi= new fungsi();
+    require_once ('content/fungsi.php');
+	
+    $pengajar = new pengajar();    
     $dataPengajar = $pengajar->getPengajar($start_from);
 ?>
 <div class="page-content">
@@ -128,7 +128,7 @@
 									. "<td>".$i."</td>"
                                     . "<td>".$data['nama']."</td>"
                                     . "<td>".$data['pendidikan']."</td>"
-                                    . "<td>".$data['tempat']."/ ".$fungsi->tanggallahir($data['tanggal'])."</td>"
+                                    . "<td>".$data['tempat']."/ ".tanggallahir($data['tanggal'])."</td>"
                                     . "<td>".$data['alamat']."</td>"
                                     . "<td>".$data['telepon']."</td>"
                                     . "<td><a href='?p=pengajar&sub=lihat&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm'  disabled='disabled'>Edit Data</a></td>"
@@ -152,7 +152,7 @@
 									. "<td>".$i."</td>"
                                     . "<td>".$data['nama']."</td>"
                                     . "<td>".$data['pendidikan']."</td>"
-                                    . "<td>".$data['tempat']."/ ".$fungsi->tanggallahir($data['tanggal'])."</td>"
+                                    . "<td>".$data['tempat']."/ ".tanggallahir($data['tanggal'])."</td>"
                                     . "<td>".$data['alamat']."</td>"
                                     . "<td>".$data['telepon']."</td>"
                                     . "<td><a href='?p=pengajar&sub=lihat&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm'  disabled='disabled'>Edit Data</a></td>"
@@ -164,7 +164,7 @@
 									. "<td>".$i."</td>"
                                     . "<td>".$data['nama']."</td>"
                                     . "<td>".$data['pendidikan']."</td>"
-                                    . "<td>".$data['tempat']."/ ".$fungsi->tanggallahir($data['tanggal'])."</td>"
+                                    . "<td>".$data['tempat']."/ ".tanggallahir($data['tanggal'])."</td>"
                                     . "<td>".$data['alamat']."</td>"
                                     . "<td>".$data['telepon']."</td>"
                                     . "<td><a href='?p=pengajar&sub=lihat&page=".$page."&edit=".md5($data['id'])."' class='btn btn-warning	btn-block  btn-sm'>Edit Data</a></td>"

@@ -1,10 +1,10 @@
 	<?php
 	$tanggal = date('Y-m-d');
 	require_once ('../classes/mainClass.php');
-    require_once ('../classes/fungsiClass.php');
 	require_once ('../classes/laporanClass.php');
 	require_once ('../classes/pengajarClass.php');
-    $fungsi = new fungsi();
+	require_once ('../fungsi.php');
+    
     $gaji = new laporangaji();
 	$setting = new settingApps();
 	$pengajar = new pengajar();
@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Laporan Gaji <?php echo $fungsi->getMonthName($_POST['bln']);?></title>
+    <title>Laporan Gaji <?php echo getMonthName($_POST['bln']);?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.css" rel="stylesheet">
@@ -39,10 +39,10 @@
                 <div class="col-xs-12">
 				<h4><strong>Laporan Gaji Pengajar</strong></h4>
 				<p>&nbsp;&nbsp;Nama : <?php echo $pengajar->takeName($_POST['idpengajar'])?></p>
-				<p>&nbsp;&nbsp;Bulan : <?php echo $fungsi->getMonthName($_POST['bln'])?></p>
+				<p>&nbsp;&nbsp;Bulan : <?php echo getMonthName($_POST['bln'])?></p>
                     <table class="table table-bordered">
                         <tbody>
-							<tr><td colspan="3" class="text-left small">Bulan : <?php echo $fungsi->getMonthName($tanggal);?></td></tr>
+							<tr><td colspan="3" class="text-left small">Bulan : <?php echo getMonthName($tanggal);?></td></tr>
                             <?php
                                 $i=1;
 								$jumlah = 0;
@@ -53,7 +53,7 @@
 										."<p> ".$i.". ".$data['nama_instrument']." <span class='small'>(".$data['hadir_pengajar']."x pertemuan)</span></p>"
 										."</div>"
 										."<div class='col-xs-5'>"
-										."<p>: Rp. ".$fungsi->formatindo($data['jumlah_pengajar'])."</p>"
+										."<p>: Rp. ".formatindo($data['jumlah_pengajar'])."</p>"
 										."</div></div>";
 									$jumlah = $jumlah + $data['jumlah_pengajar'];
                                     $i++;
@@ -61,7 +61,7 @@
 								echo "<div class='row'><div class='col-xs-3 col-xs-offset-6'><hr></div></div>";
 								echo "<div class='row'>"
 									."<div class='col-xs-6'>Total :</div>"
-									."<div class='col-xs-3'> &nbsp;&nbsp;Rp. ".$fungsi->formatindo($jumlah)."</div></div>";
+									."<div class='col-xs-3'> &nbsp;&nbsp;Rp. ".formatindo($jumlah)."</div></div>";
 								echo "</td></tr>";
                             ?>
                         </tbody>
@@ -71,7 +71,7 @@
 			<div class="row">
 				<div class="col-xs-5 pull-right text-center">
 				<?php 
-					echo "<p>".$setting->loadSetting('kota').", ".$fungsi->tglindo($tanggal)."</p>"
+					echo "<p>".$setting->loadSetting('kota').", ".tglindo($tanggal)."</p>"
 						."</br></br>ttd</br></br></br>"
 						."<p>".$setting->loadSetting('pemilik')."</p>"
 						."<p>Pemilik</p>";

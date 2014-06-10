@@ -2,16 +2,15 @@
 	<!-- Heading -->
 	<div class="single-head">
 		<?php
-		 require_once ('content/classes/fungsiClass.php');
+		require_once ('content/fungsi.php');
 		if(!isset($_GET['id']))
 		{
 			echo "<script>document.location='?p=shift'</script>";
 		}
 
-		$datetime = new fungsi();
 		?>
 		<!-- Heading -->
-		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Tambah Jam Pelajaran Baru [ Hari : <?php echo $datetime->selectHari($_GET['id'])?> ]</h3>
+		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Tambah Jam Pelajaran Baru [ Hari : <?php echo selectHari($_GET['id'])?> ]</h3>
 		<div class="clearfix"></div>
 	</div>
 	
@@ -39,7 +38,7 @@
 									<label class="col-lg-1 control-label">Jam Mulai</label>
 									<div class="col-lg-3">
 										<div class="input-group bootstrap-timepicker">
-											<input type="text" id="jam_awal" name="jam_awal" class="form-control timepicker" value="<?php if(isset($_SESSION['jam_awal'])){echo $_SESSION['jam_awal'];}else { echo '07:00';}unset($_SESSION['jam_awal']);?>">
+											<input type="text" id="jam_awal" name="jam_awal" class="form-control timepicker" value="<?php if(isset($_SESSION['jam_awal'])){echo regenerateJam($_SESSION['jam_awal']);}else { echo '07:00';}unset($_SESSION['jam_awal']);?>">
 										</div>
 									</div>
 									<label class="col-lg-1 control-label">Durasi</label>	
@@ -63,7 +62,7 @@
 									<label class="col-lg-1 control-label">Jam Akhir</label>	
 									<div class="col-lg-3">
 										<div class="input-group clockpicker">
-											<input type="text" id="jam_akhir" name="jam_akhir" class="form-control" readonly value="<?php if(isset($_SESSION['jam_akhir'])){echo $_SESSION['jam_akhir'];}else { echo '08:00';}unset($_SESSION['jam_akhir']);?>">
+											<input type="text" id="jam_akhir" name="jam_akhir" class="form-control" readonly value="<?php if(isset($_SESSION['jam_akhir'])){echo regenerateJam($_SESSION['jam_akhir']);}else { echo '08:00';}unset($_SESSION['jam_akhir']);?>">
 										</div>
 									</div>
 							</div>

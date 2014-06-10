@@ -1,12 +1,12 @@
 <?php
 $tanggal = date('Y-m-d');
 require_once ('content/classes/pembayaranClass.php');
-require_once ('content/classes/fungsiClass.php');
+require_once ('content/fungsi.php');
 
 $pembayaran= new pembayaran();
-$fungsi= new fungsi();
+
 $dataSiswa= $pembayaran->getSiswa();  
-$month = $fungsi->getMonth($tanggal);
+$month = getMonth($tanggal);
 ?>
 
 <div class="page-content">
@@ -16,7 +16,7 @@ $month = $fungsi->getMonth($tanggal);
 		<!-- Heading -->
 		<h3 class="pull-left"><i class="fa fa-credit-card lblue"></i> Pembayaran Uang Bulanan 
 			<?php if(isset($_POST['month'])&&isset($_POST['siswa'])){
-				echo $pembayaran->getName($_POST['siswa'])." pada bulan ". $fungsi->getMonthName($_POST['month']);
+				echo $pembayaran->getName($_POST['siswa'])." pada bulan ". getMonthName($_POST['month']);
 			}?>
 		</h3>
 		<div class="clearfix"></div>
@@ -58,7 +58,7 @@ $month = $fungsi->getMonth($tanggal);
 					foreach ($dataSiswa as $data) {
 						echo "<p>Nama Siswa: ".$data['nama_siswa']."</p>";
 						echo "<p>Jenis Instrument : ".$data['nama_instrument']."</p>";
-						echo "<p>Uang Bulanan: Rp. ".$fungsi->formatindo($data['biaya_instrument']).",-</p>";
+						echo "<p>Uang Bulanan: Rp. ".formatindo($data['biaya_instrument']).",-</p>";
 						echo "<form class='form-horizontal' role='form' action='content/proses.php?act=savePembayaran' method='post'>"
 							."<input type='hidden' id='bln' name='bln' class='form-control' type='text' value='".$_POST['month']."-01' required/>"
 							."<input type='hidden' id='idsiswa' name='idsiswa' class='form-control' type='text' value='".$data['id_siswa']."' required/>"
@@ -84,7 +84,7 @@ $month = $fungsi->getMonth($tanggal);
 			foreach ($cekPembayaran as $data) {
 				echo "<p>Nama Siswa: ".$data['nama_siswa']."</p>";
 				echo "<p>Jenis Instrument : ".$data['nama_instrument']."</p>";
-				echo "<p>Uang Bulanan: Rp. ".$fungsi->formatindo($data['biaya_instrument']).",- ";
+				echo "<p>Uang Bulanan: Rp. ".formatindo($data['biaya_instrument']).",- ";
 				if($data['biaya_instrument'] <= $data['jumlah']){
 					echo "<span class='label label-success'>Telah lunas membayar</span>";
 					echo "</p><br>"
@@ -101,7 +101,7 @@ $month = $fungsi->getMonth($tanggal);
 					."<div class='form-group'>"
 					."<label for='jumlah' class='control-label col-lg-2'>Jumlah dibayar (Rp.)</label>"
 					."<div class='col-lg-2'>"
-					."	<input id='jumlah' name='jumlah' class='form-control' type='text' onkeyup='this.value = addCommas(coma(this.value))' value='".$fungsi->formatindo($data['jumlah'])."' required/>"
+					."	<input id='jumlah' name='jumlah' class='form-control' type='text' onkeyup='this.value = addCommas(coma(this.value))' value='".formatindo($data['jumlah'])."' required/>"
 					."</div>"
 					."</div>";
 				echo "<div class='form-group'>"

@@ -1,17 +1,16 @@
-<?php
-	
-	
+<?php	
 	$limit = 10;  
 	if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 	$start_from = ($page-1) * $limit;
     require_once ('content/classes/siswaClass.php');
 	require_once ('content/classes/tingkatClass.php');
 	require_once ('content/classes/instrumentClass.php');
-	require_once ('content/classes/fungsiClass.php');
+	require_once ('content/fungsi.php');
+	
 	$instrument= new instrument();
     $siswa = new siswa();
     $tingkat = new tingkat();
-    $fungsi= new fungsi();
+    
     $dataInstrument = $instrument->getInstrument('*');  
     $dataSiswa = $siswa->getSiswa($start_from);
 	
@@ -27,7 +26,7 @@
 					"8"=>"warning",
 					"9"=>"black");
 	$tanggal = date('Y-m-d');				
-	$month = $fungsi->getMonth($tanggal);
+	$month = getMonth($tanggal);
 ?>
 <div class="page-content">
 	<!-- Heading -->
@@ -202,7 +201,7 @@
 							   echo"<tr>"
 									. "<td>".$i."</td>"
                                     . "<td>".$data['nama']."</td>"
-                                    . "<td>".$data['tempatlahir']."/ ".$fungsi->tanggallahir($data['tanggallahir'])."</td>"
+                                    . "<td>".$data['tempatlahir']."/ ".tanggallahir($data['tanggallahir'])."</td>"
                                     . "<td>".$data['alamat']."</td>"
                                     . "<td>".$data['telepon']."</td>"
                                     . "<td>".$data['nama_instrument']."</td>";
@@ -234,7 +233,7 @@
                                 echo"<tr>"
 									. "<td>".$i."</td>"
                                     . "<td>".$data['nama']."</td>"
-                                    . "<td>".$data['tempatlahir']."/ ".$fungsi->tanggallahir($data['tanggallahir'])."</td>"
+                                    . "<td>".$data['tempatlahir']."/ ".tanggallahir($data['tanggallahir'])."</td>"
                                     . "<td>".$data['alamat']."</td>"
                                     . "<td>".$data['telepon']."</td>"
                                     . "<td>".$data['nama_instrument']."</td>";

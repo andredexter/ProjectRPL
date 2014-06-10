@@ -75,20 +75,17 @@
                     else{
                         $_SESSION['login']="auth";
                     }                    
-					header('Location: ../');
                 }
                 $this->dbClose();
             }
             else{
                $_SESSION['login']='fail';
-               header('Location: ../');
             }            
         }
 		
         public function userLogout() {
             unset($_SESSION['usernya']);            
             unset($_SESSION['prive']);
-            header('Location: ../');
         }
 		
 		public function saveUser($username, $passwordold, $passwordnew, $validasi, $prive){
@@ -120,16 +117,13 @@
 						$_SESSION['notif']="gagalUpdate";
 				   }
 				   $this->dbClose();
-				   header('Location: ../?p=informasi&sub=user');
 				}
 				else{
 					$_SESSION['notif']="wrongPass";
-					header('Location: ../?p=informasi&sub=user&edit');
 				}
 			}
 			else{
 				$_SESSION['notif']="notValid";
-				header('Location: ../?p=informasi&sub=user&edit');
 			}
 			
 		}
@@ -147,7 +141,6 @@
 
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
 			$row =  mysqli_fetch_array($query);			
-			
 			return $row[0];
 		}
 		private function cekPassword($pass, $jenis){
@@ -190,7 +183,6 @@
 				$_SESSION['notif']="gagalUpdate";
 		   }
 		   $this->dbClose();
-		   header('Location: ../?p=informasi&sub=sekolah');
 		}
 
     }
