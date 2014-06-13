@@ -30,7 +30,7 @@
 			$siswa= mysqli_real_escape_string($this->conn, $siswa);
 			
 			$sql = "SELECT a.id_pembayaran, a.bulan, a.jumlah, a.id_siswa, b.nama_siswa, c.nama_instrument, c.biaya_instrument FROM pembayaran a LEFT JOIN siswa b ON a.id_siswa = b.id_siswa LEFT JOIN instrument c ON b.id_instrument = c.id_instrument WHERE a.bulan LIKE '$bln%' AND a.id_siswa = '$siswa'";	
-			$_SESSION['sql'] = $sql;
+			
 			$query = mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
 			$num_results = mysqli_num_rows($query); 
 			
